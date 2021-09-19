@@ -17,16 +17,18 @@ The following two points differentiate this portal from social media websites :<
 2. The members can be assured that all people on the portal belong to the community and are within reach, there are no strangers.
 
 <h3>Approach:</h3>
-The housing community will have added the details of the residents in the portal when the residents start their lease and then the residents can sign up using those credentials on the portal. 
-Get friend recommendations based on the similarity of interests with other residents. (implemented using document similarity functionality in IBM Cloud DB for ElasticSearch)
-Residents sign up and enter their details and can view other residents’ details (as revealed by them).
-They can view the items available for borrowing / list items they want to lend.
+=> The housing community will have added the details of the residents in the portal when the residents start their lease and then the residents can sign up using those credentials on the portal. <br><br>
+=> Get friend recommendations based on the similarity of interests with other residents. (implemented using document similarity functionality in IBM Cloud DB for ElasticSearch)<br><br>
+=> Residents sign up and enter their details and can view other residents’ details (as revealed by them).<br><br>
+=> They can view the items available for borrowing / list items they want to lend.
 
 
 <h3>Persona:</h3>
-Housing Community Owner Persona - The entity that owns all the houses in the community can sign up and maintain the details of the current residents in the portal.
+Housing Community Owner Persona - <br>
+The entity that owns all the houses in the community can sign up and maintain the details of the current residents in the portal.
 <br>
-Resident Persona - The resident can sign up on the portal using the credentials provided by the housing community owner and create his profile.
+Resident Persona - <br>
+The resident can sign up on the portal using the credentials provided by the housing community owner and create his profile.
 
 
 <h3>Technologies Used:</h3>
