@@ -37,3 +37,29 @@ Client side - React <br>
 Database - Cloudant <br>
 Cloud and containerization - AWS EC2, AWS ECR, AWS ECS, Docker <br>
 Similarity score functionality - IBM Cloud Databases for Elasticsearch  <br>
+
+
+<h1>Proposal 2 :</h1>
+<h2>Fantasy Football league Web Application</h2>
+
+<h3>Introduction to problem statement:</h3>
+Football is the most followed sport in the world and people love betting on their teams chances of winning.
+
+<h3>Abstract:</h3>
+Hence we intend to make a full-fledged web based application having all the information about football teams and their past and futures fixtures. Users can login to the application and based on teams past performance they can bet on their chances of winning in the upcoming fixtures.<br><br>
+
+<h3>Approach:</h3>
+We aim to adopt the following methodology in order:<br>
+1) Design the database schema to store Team information, Fixtures, Betting information.<br>
+2) Create the backend functionality using NodeJs.<br>
+3) Create frontend functionality using ReactJs.<br>
+4) Use TensorFlow.Js for betting recommendation.<br>
+5) Deploy the application on AWS.<br>
+
+<h3>Technologies Used:</h3>
+We intend to use, but not limited to the following technologies for this project: <br>
+1) MongoDB database <br>
+2) Express.js <br>
+3) React <br>
+4) Node.js <br>
+5) Amazon Web Services <br>
