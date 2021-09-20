@@ -63,3 +63,29 @@ We intend to use, but not limited to the following technologies for this project
 3) React <br>
 4) Node.js <br>
 5) Amazon Web Services <br>
+
+<h1>Proposal 3 :</h1>
+<h2>Fitness Web Application</h2>
+
+<h3>Introduction to problem statement:</h3>
+With the growing number of activities, a person is becoming more and more busy everyday. This seriously affects the lifestyle of the individual and directly impacts his/her health. In today’s fast paced world it is difficult to find time to drive to and fro to a gym or a park for exercise. One way to keep up with health and save some if not all the time is to have a quick exercise session at home. Exercise alone is not enough, a proper diet is equally important for an individual’s well being. However, not everyone is aware of the nutrient values of the food they eat.
+
+<h3>Abstract:</h3>
+This project aims at solving these two problems by creating and deploying a web application that generates workout routines based on a person’s current physical body and future goals and also provides a proper diet plan.<br><br>
+
+<h3>Approach:</h3>
+We aim to adopt the following methodology in order:<br>
+1) Create a layout of the web views so that a user can successfully signup/login, enter his/her information and generate workout routines and diet plans.<br>
+2) Design the database schema to store user information, exercises data and food’s nutritional values.<br>
+3) Create a backend server.<br>
+4) Merge backend server with web views on the frontend to display dynamic data.<br>
+5) Set up secure login for users.<br>
+6) Deploy the application.<br>
+
+<h3>Technologies Used:</h3>
+We intend to use, but not limited to the following technologies for this project: <br>
+1) MongoDB database <br>
+2) Express.js <br>
+3) React <br>
+4) Node.js <br>
+5) Amazon Web Services <br>
