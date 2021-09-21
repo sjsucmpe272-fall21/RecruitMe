@@ -40,29 +40,27 @@ Similarity score functionality - IBM Cloud Databases for Elasticsearch  <br>
 
 
 <h1>Proposal 2 :</h1>
-<h2>Fantasy Football league Web Application</h2>
+<h2>Recruiting Web Application having Tinder Like UI</h2>
 
-<h3>Introduction to problem statement:</h3>
-Football is the most followed sport in the world and people love betting on their teams chances of winning.
+<h3>Problem and Goals:</h3>
+With thousands of applicants applying for a job position, it is very difficult to keep track of all the applicants applied and the number of 	applicants selected/rejected in a particular round. Many recruiting platforms that are there today don’t provide an intuitive UI which makes the recruitment process as a recruiter and applying for jobs as a job seeker, boring and tedious. We intend to make a full-fledged web based application having all the necessary features needed for recruiting which will also recommend the suitable candidates to the recruiter and suitable jobs to the job seeker. This web app will have an intuitive UI just like Tinder where the recruiter/candidate can swipe left and right the candidates/job opening respectively.<br>
 
-<h3>Abstract:</h3>
-Hence we intend to make a full-fledged web based application having all the information about football teams and their past and futures fixtures. Users can login to the application and based on teams past performance they can bet on their chances of winning in the upcoming fixtures.<br><br>
-
-<h3>Approach:</h3>
+<h3>Methodology:</h3>
 We aim to adopt the following methodology in order:<br>
-1) Design the database schema to store Team information, Fixtures, Betting information.<br>
-2) Create the backend functionality using NodeJs.<br>
-3) Create frontend functionality using ReactJs.<br>
-4) Use TensorFlow.Js for betting recommendation.<br>
-5) Deploy the application on AWS.<br>
+1)	Design the database schema to store candidate information, Job information, Recruitment Process information.<br>
+2)	Create the backend functionality using NodeJs.<br>
+3)	Create frontend functionality using ReactJs.<br>
+4)	Use TensorFlow.Js for recommendation.<br>
+5)	Deploy the application on AWS.<br>
 
-<h3>Technologies Used:</h3>
-We intend to use, but not limited to the following technologies for this project: <br>
-1) MongoDB database <br>
-2) Express.js <br>
-3) React <br>
-4) Node.js <br>
-5) Amazon Web Services <br>
+<h3>Technologies:</h3>
+We intend to use, but not limited to the following technologies for this project:<br>
+1)	MongoDB database<br>
+2)	Express.js<br>
+3)	React<br>
+4)	Node.js<br>
+5)	Amazon Web Services<br>
+
 
 <h1>Proposal 3 :</h1>
 <h2>Fitness Web Application</h2>
@@ -90,25 +88,32 @@ We intend to use, but not limited to the following technologies for this project
 4) Node.js <br>
 5) Amazon Web Services <br>
 
+
 <h1>Proposal 4 :</h1>
-<h2>Recruiting Web Application having Tinder Like UI</h2>
+<h2>Fantasy Football league Web Application</h2>
 
-<h3>Problem and Goals:</h3>
-With thousands of applicants applying for a job position, it is very difficult to keep track of all the applicants applied and the number of 	applicants selected/rejected in a particular round. Many recruiting platforms that are there today don’t provide an intuitive UI which makes the recruitment process as a recruiter and applying for jobs as a job seeker, boring and tedious. We intend to make a full-fledged web based application having all the necessary features needed for recruiting which will also recommend the suitable candidates to the recruiter and suitable jobs to the job seeker. This web app will have an intuitive UI just like Tinder where the recruiter/candidate can swipe left and right the candidates/job opening respectively.<br>
+<h3>Introduction to problem statement:</h3>
+Football is the most followed sport in the world and people love betting on their teams chances of winning.
 
-<h3>Methodology:</h3>
+<h3>Abstract:</h3>
+Hence we intend to make a full-fledged web based application having all the information about football teams and their past and futures fixtures. Users can login to the application and based on teams past performance they can bet on their chances of winning in the upcoming fixtures.<br><br>
+
+<h3>Approach:</h3>
 We aim to adopt the following methodology in order:<br>
-1)	Design the database schema to store candidate information, Job information, Recruitment Process information.<br>
-2)	Create the backend functionality using NodeJs.<br>
-3)	Create frontend functionality using ReactJs.<br>
-4)	Use TensorFlow.Js for recommendation.<br>
-5)	Deploy the application on AWS.<br>
+1) Design the database schema to store Team information, Fixtures, Betting information.<br>
+2) Create the backend functionality using NodeJs.<br>
+3) Create frontend functionality using ReactJs.<br>
+4) Use TensorFlow.Js for betting recommendation.<br>
+5) Deploy the application on AWS.<br>
 
-<h3>Technologies:</h3>
-We intend to use, but not limited to the following technologies for this project:<br>
-1)	MongoDB database<br>
-2)	Express.js<br>
-3)	React<br>
-4)	Node.js<br>
-5)	Amazon Web Services<br>
+<h3>Technologies Used:</h3>
+We intend to use, but not limited to the following technologies for this project: <br>
+1) MongoDB database <br>
+2) Express.js <br>
+3) React <br>
+4) Node.js <br>
+5) Amazon Web Services <br>
+
+
+
 
