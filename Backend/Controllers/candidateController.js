@@ -36,3 +36,18 @@ exports.withdraw_job = (req,res) =>
         }
     })
 }
+
+exports.getCandidateProfile = ()=> {
+    var candidateId = req.body.candidateId;
+
+    return Candidate.find({_id: candidateId})
+    .exec()
+    .then((candidate) => {
+        return res.json(candidate);
+    })
+    .catch(error=>{
+        return {
+            error: "No candidate Found "+error
+        };
+    })
+}

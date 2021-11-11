@@ -4,7 +4,7 @@ const Job = require("../Models/JobSchema");
 exports.getEmployerProfile = ()=> {
     var employerId = req.body.employerId;
 
-    return Employer.find({employerId: employerId})
+    return Employer.find({_id: employerId})
     .exec()
     .then((employer) => {
         return res.json(employer);
