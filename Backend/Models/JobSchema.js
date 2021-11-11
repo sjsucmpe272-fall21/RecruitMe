@@ -30,7 +30,8 @@ var jobSchema = new mongoose.Schema(
           maxlength: 50,
           trim: true
       },
-      candidatesApplied : [CandidateSchema]
+      candidatesApplied : [CandidateSchema],
+      candidatesSelected : [CandidateSchema]
     }
 )
 
