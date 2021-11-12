@@ -9,6 +9,10 @@
     background-position: center;
     box-shadow: opx 18px 53px 0px rgba(0,0,0,0.3);
 }
+
+.card__image{
+    height: 100%;
+}
 .tinderCards__profile{
     position: absolute;
     left:50%
@@ -27,4 +31,8 @@
     position: absolute;
     bottom: 10px;
     color: aliceblue;
+}
+
+.githubDetails{
+    background-color: beige;
 }
