@@ -1,28 +1,36 @@
 import React, {useState} from 'react'
 import TinderCard from "react-tinder-card"
 import "./TinderCards.css"
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
+
 function TinderCards() {
     const [people,setPeople] = useState([
         {
             name: 'Steve',
-            url: "https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_auto:good%2Cw_300/MTY2MzU3OTcxMTUwODQxNTM1/steve-jobs--david-paul-morrisbloomberg-via-getty-images.jpg"
+            url: ["https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_auto:good%2Cw_300/MTY2MzU3OTcxMTUwODQxNTM1/steve-jobs--david-paul-morrisbloomberg-via-getty-images.jpg"]
         },
         {
             name: 'Mark',
-            url:"https://i.insider.com/60c1df3823393a00188e25dc?width=1000&format=jpeg&auto=webp"
+            url:["https://media.wired.com/photos/5ed6891ed9fb171733fd7840/1:1/w_1287,h_1287,c_limit/Ideas-Zuckerberg-1200875675.jpg","https://i.insider.com/60c1df3823393a00188e25dc?width=1000&format=jpeg&auto=webp"]
         }
     ]);
 
 
     return (
         <div>
-            <p>Tinder Cards</p>
             <div className="tinderCards__cardContainer">
                 {people.map((person)=>{
                     return <TinderCard className="swipe" key={person.name} preventSwipe={['up','down']}>
                         <div 
-                        style={{backgroundImage: `url(${person.url})`}}
                         className="card">
+                            <Carousel showThumbs={false} infiniteLoop={true}>
+                                {person.url.length>0 && person.url.map((image)=>{
+                                return <div className="card">
+                                    <img src={image} alt="profile"/>
+                                </div>
+                                })}
+                            </Carousel>
                             <h3>{person.name}</h3>
                         </div>
                     </TinderCard>
