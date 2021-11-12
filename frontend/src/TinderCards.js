@@ -24,7 +24,7 @@ function TinderCards() {
                     return <TinderCard className="swipe" key={person.name} preventSwipe={['up','down']}>
                         <div 
                         className="card">
-                            <Carousel showThumbs={false} infiniteLoop={true}>
+                            <Carousel showThumbs={false} infiniteLoop={true} showStatus={false}>
                                 {person.url.length>0 && person.url.map((image)=>{
                                 return <div className="card">
                                     <img src={image} alt="profile"/>
