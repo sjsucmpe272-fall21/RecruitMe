@@ -16,7 +16,7 @@ function TinderCards() {
         {
             name: 'Mark',
             url: ["https://media.wired.com/photos/5ed6891ed9fb171733fd7840/1:1/w_1287,h_1287,c_limit/Ideas-Zuckerberg-1200875675.jpg", "https://i.insider.com/60c1df3823393a00188e25dc?width=1000&format=jpeg&auto=webp"],
-            githubUserName: "vineetk10"
+            githubUserName: "scopsy"
         }
     ]);
 
