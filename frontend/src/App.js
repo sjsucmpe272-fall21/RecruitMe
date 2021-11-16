@@ -1,8 +1,8 @@
 import React from 'react'
-import Header from './Header'
+import Header from './Components/Header'
 import {BrowserRouter as Router,Switch, Route, Link} from "react-router-dom"
 import './App.css';
-import TinderCards from "./TinderCards"
+import TinderCards from "./Components/TinderCards"
 
 function App() {
   return (
