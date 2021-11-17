@@ -3,6 +3,9 @@ import Header from './Components/Header'
 import {BrowserRouter as Router,Switch, Route, Link} from "react-router-dom"
 import './App.css';
 import TinderCards from "./Components/TinderCards"
+import RecruiterRoute from "./authHelper/RecruiterRoute"
+import CandidateRoute from "./authHelper/CandidateRoute"
+import TinderCardsForCandidates from "./Components/TinderCardsForCandidates"
 
 function App() {
   return (
@@ -12,9 +15,16 @@ function App() {
         <Switch>
           <Route path="/chat">
           </Route>
-          <Route path="/">
-            <TinderCards/>
+          <Route path="/candidate">
+            <TinderCardsForCandidates/>
           </Route>
+          <RecruiterRoute path="/">
+            <TinderCards user="recruiter"/>
+          </RecruiterRoute>
+          {/* <CandidateRoute path="/">
+            <TinderCards user="candidate"/>
+          </CandidateRoute> */}
+         
         </Switch>
       </Router>
     </div>
