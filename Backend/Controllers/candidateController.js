@@ -79,25 +79,24 @@ exports.getJobs = (req,res)=>{
         // Add listeners for scraper events
         scraper.on(events.scraper.data, async (data) => {
             let url = data.link;
-            const job = [];
-            job.push(
-                data.description.length,
-                data.descriptionHTML.length,
-                `Description='${data.description}'`,
-                `Query='${data.query}'`,
-                `Location='${data.location}'`,
-                `Id='${data.jobId}'`,
-                `Title='${data.title}'`,
-                `Company='${data.company ? data.company : "N/A"}'`,
-                `Place='${data.place}'`,
-                `Date='${data.date}'`,
-                `Link='${data.link}'`,
-                `applyLink='${data.applyLink ? data.applyLink : "N/A"}'`,
-                `senorityLevel='${data.senorityLevel}'`,
-                `function='${data.jobFunction}'`,
-                `employmentType='${data.employmentType}'`,
-                `industries='${data.industries}'`,
-            );
+            let job = {};
+            job = {
+                // data.description.length,
+                // data.descriptionHTML.length,
+                "jobDescription" : data.description,
+                "jobType" : data.query,
+                "jobLocation":data.location,
+                "_id":data.jobId,
+                "name":data.title,
+                "company":data.company ? data.company : "N/A",
+                "dateposted":data.date,
+                "jobLink":data.link,
+                "applyLink":data.applyLink ? data.applyLink : "N/A",
+                "senorityLevel":data.senorityLevel,
+                "function":data.jobFunction,
+                "jobType":data.employmentType,
+                "industries":data.industries,
+            };
             jobs.push(job);
         });
     
@@ -106,6 +105,12 @@ exports.getJobs = (req,res)=>{
         });
     
         scraper.on(events.scraper.end, () => {
+            Job.insertMany(jobs)
+            .then(function(){
+                console.log("Data inserted")  
+            }).catch(function(error){
+                console.log(error)      
+            });
             console.log('All done!');
             return res.json(jobs);
         });
