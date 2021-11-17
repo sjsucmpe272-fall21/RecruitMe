@@ -4,35 +4,60 @@ const CandidateSchema = require("./CandidateSchema").schema
 
 var jobSchema = new mongoose.Schema(
     {
+      _id: {
+        type: String
+      },
       name: {
         type: String,
-        required: true,
+        // required: true,
         maxlength: 100,
         trim: true
       },
       jobType: {
         type: String,
-        required: true,
+        // required: true,
         maxlength: 100,
         trim: true
       },
       jobDescription: {
         type: String,
-        required: true,
-        maxlength: 100,
+        // // required: true,
+        // maxlength: 100,
         trim: true
       },
       company: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Company'
+        type: String
       },
       jobLocation:{
           type: String,
-          maxlength: 50,
+          maxlength: 1000,
           trim: true
       },
-      candidatesApplied : [CandidateSchema],
-      candidatesSelected : [CandidateSchema]
+      senorityLevel:{
+        type: String,
+        maxlength: 500,
+        trim: true
+    },
+    applyLink:{
+      type:String
+    },
+    jobFunction:{
+      type:String,
+      trim: true
+    },
+    industries:{
+      type:String,
+      trim: true
+      // maxLength: 50
+    },
+    dateposted:{
+      type: String
+    },
+    jobLink:{
+      type: String
+    }
+      // candidatesApplied : [CandidateSchema],
+      // candidatesSelected : [CandidateSchema]
     }
 )
 
