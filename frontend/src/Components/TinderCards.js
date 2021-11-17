@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import TinderCard from "react-tinder-card"
-import "./TinderCards.css"
+import "../css/TinderCards.css"
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 

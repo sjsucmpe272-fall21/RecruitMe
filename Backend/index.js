@@ -9,6 +9,7 @@ var passport = require('passport');
 const employerRoutes = require("./Routes/employerRoute");
 const loginRoute = require("./Routes/loginRoute");
 const logoutRoute = require("./Routes/logoutRoute");
+const candidateRoutes = require("./Routes/candidateRoute");
 
 const env = process.env.NODE_ENV || 'development';
 
@@ -17,7 +18,7 @@ mongoose.connect(process.env.DATABASE, {
         useNewUrlParser: true
     }).then(() => {
         console.log("DB CONNECTED");
-    }).catch(console.log("DB CONNECTED FAILED"))
+    }).catch((error)=>console.log("DB CONNECTED FAILED"+error))
 
 //PORT
 const port = process.env.PORT || 8001;
@@ -43,5 +44,6 @@ app.use(passport.initialize());
 app.use("/api", employerRoutes);
 app.use("/", loginRoute);
 app.use("/", logoutRoute);
+app.use("/api", candidateRoutes);
 
 module.exports = app;

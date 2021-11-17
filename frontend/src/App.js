@@ -1,10 +1,13 @@
 import React from 'react'
-import Header from './Header'
+import Header from './Components/Header'
 import {BrowserRouter as Router,Switch, Route, Link} from "react-router-dom"
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import TinderCards from "./TinderCards"
 import Login from './Login/login';
+import TinderCards from "./Components/TinderCards"
+import RecruiterRoute from "./authHelper/RecruiterRoute"
+import CandidateRoute from "./authHelper/CandidateRoute"
+import TinderCardsForCandidates from "./Components/TinderCardsForCandidates"
 
 function App() {
   return (
@@ -12,9 +15,21 @@ function App() {
       <Header/>
       <Router>
         <Switch>
-          <Route exact path="/chat"></Route>
-          <Route exact path="/"><TinderCards/></Route>
-          <Route exact path="/login"><Login /></Route>
+          <Route exact path="/chat">
+          </Route>
+          <Route exact path="/candidate">
+            <TinderCardsForCandidates/>
+          </Route>
+          <RecruiterRoute exact path="/">
+            <TinderCards user="recruiter"/>
+          </RecruiterRoute>
+          <Route exact path="/login">
+            <Login />
+          </Route>
+          {/* <CandidateRoute path="/">
+            <TinderCards user="candidate"/>
+          </CandidateRoute> */}
+         
         </Switch>
       </Router>
     </div>
