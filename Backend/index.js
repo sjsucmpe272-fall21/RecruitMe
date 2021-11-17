@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
 const employerRoutes = require("./Routes/employerRoute");
+const candidateRoutes = require("./Routes/candidateRoute");
 
 const env = process.env.NODE_ENV || 'development';
 
@@ -14,7 +15,7 @@ mongoose.connect(process.env.DATABASE, {
         useNewUrlParser: true
     }).then(() => {
         console.log("DB CONNECTED");
-    }).catch(console.log("DB CONNECTED FAILED"))
+    }).catch((error)=>console.log("DB CONNECTED FAILED"+error))
 
 //PORT
 const port = process.env.PORT || 8001;
@@ -33,5 +34,6 @@ app.use(cookieParser());
 app.use(cors());
 
 app.use("/api", employerRoutes);
+app.use("/api", candidateRoutes);
 
 module.exports = app;
