@@ -1,5 +1,7 @@
 const Candidate = require("../Models/CandidateSchema");
 const Job = require("../Models/JobSchema");
+const FormattedJobData = require("../Models/FormattedJobData");
+
 const { 
     LinkedinScraper,
     relevanceFilter,
@@ -64,6 +66,7 @@ exports.getCandidateProfile = ()=> {
 }
 
 exports.getJobs = (req,res)=>{
+    const formattedJobs = [];
     const jobs = [];
     (async () => {
         // Each scraper instance is associated with one browser.
@@ -80,6 +83,11 @@ exports.getJobs = (req,res)=>{
         scraper.on(events.scraper.data, async (data) => {
             let url = data.link;
             let job = {};
+            let formattedJob = {};
+            formattedJob = {
+                "_id":data.jobId,
+                "formattedData": data.description+data.query+data.location+data.senorityLevel+data.employmentType+data.industries
+            }
             job = {
                 // data.description.length,
                 // data.descriptionHTML.length,
@@ -93,11 +101,12 @@ exports.getJobs = (req,res)=>{
                 "jobLink":data.link,
                 "applyLink":data.applyLink ? data.applyLink : "N/A",
                 "senorityLevel":data.senorityLevel,
-                "function":data.jobFunction,
+                "jobFunction":data.jobFunction,
                 "jobType":data.employmentType,
                 "industries":data.industries,
             };
             jobs.push(job);
+            formattedJobs.push(formattedJob);
         });
     
         scraper.on(events.scraper.error, (err) => {
@@ -105,12 +114,31 @@ exports.getJobs = (req,res)=>{
         });
     
         scraper.on(events.scraper.end, () => {
-            Job.insertMany(jobs)
-            .then(function(){
-                console.log("Data inserted")  
-            }).catch(function(error){
-                console.log(error)      
-            });
+           
+            jobs.forEach((n)=>{
+                Job.findOneAndUpdate(n,n, { upsert: true },(err,job)=>{
+                    if(err)
+                    {
+                        console.log(err)
+                        return;
+                    }
+                    
+                    console.log("Data inserted")  
+                })
+            })
+            
+            formattedJobs.forEach((n)=>{
+                FormattedJobData.findOneAndUpdate(n,n, { upsert: true },(err,job)=>{
+                    if(err)
+                    {
+                        console.log(err)
+                        return;
+                    }
+                    
+                    console.log("Formatted Data inserted")  
+                })
+            })
+            
             console.log('All done!');
             return res.json(jobs);
         });
@@ -143,13 +171,13 @@ exports.getJobs = (req,res)=>{
                         filters: {
                             type: [typeFilter.FULL_TIME, typeFilter.CONTRACT]    
                         },       
-                    }                                                       
-                },
-                {
-                    query: "Sales",
-                    options: {                    
-                        limit: 2, // This will override global option limit (33)
-                    }
+                    }                                                    
+                // },
+                // {
+                //     query: "Sales",
+                //     options: {                    
+                //         limit: 2, // This will override global option limit (33)
+                //     }
                 },
             ], { // Global options for this run, will be merged individually with each query options (if any)
                 locations: ["Europe"],

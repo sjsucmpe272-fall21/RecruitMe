@@ -55,6 +55,9 @@ var jobSchema = new mongoose.Schema(
     },
     jobLink:{
       type: String
+    },
+    formattedData:{
+      type:String
     }
       // candidatesApplied : [CandidateSchema],
       // candidatesSelected : [CandidateSchema]
