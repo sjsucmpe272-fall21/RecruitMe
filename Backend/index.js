@@ -10,6 +10,7 @@ const employerRoutes = require("./Routes/employerRoute");
 const loginRoute = require("./Routes/loginRoute");
 const logoutRoute = require("./Routes/logoutRoute");
 const candidateRoutes = require("./Routes/candidateRoute");
+const jobRoute = require('./Routes/jobRoute');
 
 const env = process.env.NODE_ENV || 'development';
 
@@ -44,6 +45,7 @@ app.use(passport.initialize());
 app.use("/api", employerRoutes);
 app.use("/", loginRoute);
 app.use("/", logoutRoute);
+app.use("/", jobRoute)
 app.use("/api", candidateRoutes);
 
 module.exports = app;

@@ -8,6 +8,7 @@ import TinderCards from "./Components/TinderCards"
 import RecruiterRoute from "./authHelper/RecruiterRoute"
 import CandidateRoute from "./authHelper/CandidateRoute"
 import TinderCardsForCandidates from "./Components/TinderCardsForCandidates"
+import NewJobList from './Components/NewJobList';
 
 function App() {
   return (
@@ -28,6 +29,9 @@ function App() {
           <RecruiterRoute exact path="/home">
             <TinderCards user="recruiter"/>
           </RecruiterRoute>
+          <Route exact path="/newJobs">
+            <NewJobList />
+          </Route>
           {/* <CandidateRoute path="/">
             <TinderCards user="candidate"/>
           </CandidateRoute> */}

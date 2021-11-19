@@ -1,17 +1,33 @@
 const Job = require("../Models/JobSchema");
 
-exports.getAllJobs = ()=> {
+exports.getAllJobs = (req, res)=> {
 
-    return Job.find()
-    .exec()
-    .then((job) => {
-        return res.json(job);
-    })
-    .catch(error=>{
-        return {
-            error: "No jobs Found " + error
-        };
-    })
+    // return Job.find()
+    // .exec()
+    // .then((job) => {
+    //     return res.json(job);
+    // })
+    // .catch(error=>{
+    //     return {
+    //         error: "No jobs Found " + error
+    //     };
+    // })
+
+    Job.find(
+        {},
+        (err, doc) => {
+            if(err) {
+                console.log('error ', err);
+            }
+            else {
+                console.log(doc);
+                res.writeHead(200, {
+                    'Content-Type': 'text/plain'
+                });
+                res.end(JSON.stringify(doc));
+            }
+        }
+    )
 }
 
 exports.read_job = (req,res) =>

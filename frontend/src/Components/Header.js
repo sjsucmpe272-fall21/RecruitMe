@@ -35,6 +35,7 @@ function Header() {
             <IconButton>
                 <ForumIcon className="header__icon" fontSize="large"/>
             </IconButton>
+            <Button variant="outlined" href="/newJobs">Job Listings</Button>
             <Button variant="outlined" color="error" onClick={handleLogout}>
                 Logout
             </Button>
