@@ -3,6 +3,7 @@ import TinderCard from "react-tinder-card"
 import "../css/TinderCards.css"
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
+import Header from './Header';
 
 import GithubDetails from './GithubDetails';
 
@@ -21,6 +22,8 @@ function TinderCards() {
     ]);
 
     return (
+        <>
+        <Header />
         <div>
             <div className="tinderCards__cardContainer">
                 {people.map((person) => {
@@ -41,6 +44,7 @@ function TinderCards() {
                 })}
             </div>
         </div>
+        </>
     )
 }
 

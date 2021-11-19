@@ -2,6 +2,7 @@ import React,{ useState, useEffect } from 'react'
 import Axios from "axios"
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
+import Header from './Header';
 
 function GithubDetails(props) {
     const [repos, setRepos] = useState([]);
@@ -25,6 +26,8 @@ function GithubDetails(props) {
         fetchDetails(props)
     }, [])
     return (
+        <>
+        <Header />
         <div className="githubDetails">
             {repos!=undefined && repos.map(repo => (
                 <List key={repo.id}>
@@ -34,6 +37,7 @@ function GithubDetails(props) {
                 </List>
             ))}
         </div>
+        </>
     )
 }
 

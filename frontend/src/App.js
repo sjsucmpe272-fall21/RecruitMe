@@ -12,24 +12,25 @@ import TinderCardsForCandidates from "./Components/TinderCardsForCandidates"
 function App() {
   return (
     <div className="App">
-      <Header/>
       <Router>
         <Switch>
+          <Route exact path="/">
+            <Login />
+          </Route>
+          <Route exact path="/login">
+            <Login />
+          </Route>
           <Route exact path="/chat">
           </Route>
           <Route exact path="/candidate">
             <TinderCardsForCandidates/>
           </Route>
-          <RecruiterRoute exact path="/">
+          <RecruiterRoute exact path="/home">
             <TinderCards user="recruiter"/>
           </RecruiterRoute>
-          <Route exact path="/login">
-            <Login />
-          </Route>
           {/* <CandidateRoute path="/">
             <TinderCards user="candidate"/>
           </CandidateRoute> */}
-         
         </Switch>
       </Router>
     </div>

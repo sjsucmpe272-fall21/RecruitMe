@@ -1,38 +1,34 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import {Formik, Form, Field, ErrorMessage} from 'formik';
 import axios from 'axios';
 // import jwt_decode from 'jwt-decode';
 
 function Login(props) {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email] = useState('');
+    const [password] = useState('');
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     function handleLogin(details) {
         console.log(details);
         axios.post('http://localhost:8001/login', details)
             .then(response => {
                 console.log('response ', response);
-                localStorage.setItem("token", response.data);
-                // response.data = jwt_decode(response.data.split(' ')[1]);
-                // console.log("details ", details);
-                // console.log(localStorage.getItem("token"));
-                axios.defaults.headers.common['Authorization'] = localStorage.setItem("token", response.data);
+                const token = response.data;
+                localStorage.setItem('token', token)
+                axios.defaults.headers.common['Authorization'] = token;
+                if(token.length > 0) {
+                    setIsLoggedIn(true);
+                }
             })
             .catch(error => {
                 console.log('error ', error);
             })
     }
 
-    let redirectVar = null;
-    let token = localStorage.getItem('token') || '';
-    if (token.length > 0) {
-        redirectVar = <Redirect to="/" />
-    }
-
     return (
         <div className="container my-5" style={{maxWidth: '25rem'}}>
-            {redirectVar}
+            {localStorage.getItem('token') ? <Redirect to='/home' /> : null}
                 <div className="col card" style={{maxWidth: '25rem'}}>
                     <div className="card-body align-middle">
                         <h5 className="card-title">Login</h5>
