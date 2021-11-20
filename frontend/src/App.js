@@ -3,12 +3,13 @@ import Header from './Components/Header'
 import {BrowserRouter as Router,Switch, Route, Link} from "react-router-dom"
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import Login from './Components/Login';
+import Login from './Components/login';
 import TinderCards from "./Components/TinderCards"
 import RecruiterRoute from "./authHelper/RecruiterRoute"
 import CandidateRoute from "./authHelper/CandidateRoute"
 import TinderCardsForCandidates from "./Components/TinderCardsForCandidates"
 import NewJobList from './Components/NewJobList';
+import RecruiterDashboard from './Components/recruiter_dashboard/recruiter_dashboard'
 
 function App() {
   return (
@@ -31,6 +32,9 @@ function App() {
           </RecruiterRoute>
           <Route exact path="/newJobs">
             <NewJobList />
+          </Route>
+          <Route exact path="/recruiter_dashboard">
+            <RecruiterDashboard />
           </Route>
           {/* <CandidateRoute path="/">
             <TinderCards user="candidate"/>
