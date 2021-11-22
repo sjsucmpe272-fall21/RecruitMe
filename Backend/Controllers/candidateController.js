@@ -1,7 +1,7 @@
 const Candidate = require("../Models/CandidateSchema");
 const Job = require("../Models/JobSchema");
 const FormattedJobData = require("../Models/FormattedJobData");
-
+const client = require('../elasticsearch/connection');
 const { 
     LinkedinScraper,
     relevanceFilter,
@@ -94,7 +94,6 @@ exports.getJobs = (req,res)=>{
                 "jobDescription" : data.description,
                 "jobType" : data.query,
                 "jobLocation":data.location,
-                "_id":data.jobId,
                 "name":data.title,
                 "company":data.company ? data.company : "N/A",
                 "dateposted":data.date,
@@ -105,8 +104,23 @@ exports.getJobs = (req,res)=>{
                 "jobType":data.employmentType,
                 "industries":data.industries,
             };
+            
+            await client.index({ 
+                index: 'jobs',
+                id: data.jobId,
+                body: job
+            })
+            .then(()=>{
+                console.log("Inserted into elastic search successfully");
+            })
+            .catch((err)=>{
+                console.log("Inserted into elastic search Failed "+err);
+            })
+
+            job._id = data.jobId;
             jobs.push(job);
             formattedJobs.push(formattedJob);
+
         });
     
         scraper.on(events.scraper.error, (err) => {
