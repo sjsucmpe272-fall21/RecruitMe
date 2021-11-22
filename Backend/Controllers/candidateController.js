@@ -204,3 +204,22 @@ exports.getJobs = (req,res)=>{
         await scraper.close();
     })();
 }
+
+exports.getSuitableJobs = async (req,res)=>{
+    await client.search({
+        index: 'jobs',
+        body: {
+          query: {
+            match: {
+                jobDescription: 'Electronics engineer'
+            }
+          }
+        }
+      })
+      .then((resp)=>{
+          return res.json(resp);
+      })
+      .catch((err)=>{
+          console.log("ERROR IS "+err);
+      })
+}
