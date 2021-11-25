@@ -1,5 +1,6 @@
 const Employer = require("../Models/EmployerSchema");
 const Job = require("../Models/JobSchema");
+const Candidate = require("../Models/CandidateSchema");
 
 exports.getEmployerProfile = ()=> {
     var employerId = req.body.employerId;
@@ -82,4 +83,22 @@ exports.get_jobs = async (req,res) =>
             res.json(result)
         }
     });
+}
+
+exports.get_applied_candidates = async (req,res) =>
+{
+    let app_can = {}
+    for (job_id in req.body)
+    {
+        app_can[job_id] = []
+        let candidates = req.body[job_id]
+        for (i in candidates)
+        {
+            let candidate_id = candidates[i]
+            let candidate = await Candidate.find({_id:candidate_id})
+            app_can[job_id].push(candidate[0])
+        }
+    }
+    res.send(app_can)
+
 }

@@ -28,3 +28,26 @@ export const jobs_list_columns = [
     selector: "senorityLevel",
   }
 ];
+
+export const applied_columns = [
+  {
+    name: "Job ID",
+    selector: "job_id",
+  },
+  {
+    name: "Job Title",
+    selector: "job_title",
+  },
+  {
+    name: "Candidate ID",
+    selector: "candidate_id",
+  },
+  {
+    name: "Candidate Name",
+    selector: "candidate_name",
+  },
+  {
+    name: "Phone",
+    selector: "phone",
+  }
+];

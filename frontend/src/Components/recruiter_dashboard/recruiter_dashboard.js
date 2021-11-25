@@ -4,15 +4,20 @@ import { Tabs, Tab } from "react-bootstrap";
 import DataTable from "react-data-table-component";
 import DataTableExtensions from "react-data-table-component-extensions";
 import "react-data-table-component-extensions/dist/index.css";
-import { jobs_list_columns } from "./recruiter_data";
+import { jobs_list_columns, applied_columns } from "./recruiter_data";
 import HeaderRecruiter from "./recruiter_header"
-import { GETCOMPANY, GETJOBS, JOBDETAILS} from "../../api";
+import { GETCOMPANY, GETJOBS, APP_CAN} from "../../api";
 import "../../css/recruiter_dashboard.css"
 
 const Dashboard = () => {
   const [isLoading_jobs_list, setLoading_jobs_list] = useState(true);
+  const [isLoading_applied, setLoading_Applied] = useState(true);
   const [table_jobs_list, setTable_jobs_list] = useState({
     columns: jobs_list_columns,
+    data: {},
+  });
+  const [table_applied, setTable_applied] = useState({
+    columns: applied_columns,
     data: {},
   });
 
@@ -26,40 +31,56 @@ const Dashboard = () => {
     // List Jobs
     const getjobs = async () =>
     {
-      axios.post(GETCOMPANY,{'email':'davidlee@google.com'}).then((result) => 
+      // get employer's company
+      let company_response = await axios.post(GETCOMPANY,{'email':'davidlee@google.com'})
+      let company = company_response.data[0].company
+
+      // get all jobs for this company
+      let jobs_response = await  axios.post(GETJOBS,{'company':company})
+      let jobs = jobs_response.data
+
+        setTable_jobs_list((prevState) => ({
+        ...prevState,
+
+        data: jobs,
+      }));
+      setLoading_jobs_list(false);
+
+      let job_det = {}
+      // get applied candidate's names
+      let applied_candidates = {}
+      for (let i=0; i<jobs.length; i++)
       {
-        let company = result.data[0].company
-        axios.post(GETJOBS,{'company':company}).then((response) =>
-        {
-          console.log(response.data)
-          let jobids = response.data
-          
-          setTable_jobs_list((prevState) => ({
-            ...prevState,
-    
-            data: response.data,
-          }));
-          setLoading_jobs_list(false);
+        let jobid = jobs[i]._id
+        applied_candidates[jobid] = jobs[i].candidates_applied
+        job_det[jobid] = jobs[i]
+      }
 
-          let promises = []
-          for (let i=0; i=jobids.length; i++)
-          {
-            console.log(jobids[i])
-          }
-          //   promises.push(axios.post(JOBDETAILS,{'job_id':jobids[i]._id}).then((job_det) =>
-          //   {
-          //     console.log(job_det)
-          //   }))
-          // }
-          // promises.toLocaleString(promises).then(() => {
-          //   console.log("abc")
-          // })
-          
+      let app_can_response = await axios.post(APP_CAN,applied_candidates)
+      let app_can = app_can_response.data
 
-        })
-      })
+      let app_can_data = []
+      for (let jid in app_can)
+      {
+            for (let i=0; i<app_can[jid].length; i++)
+            {
+                  let temp = {}
+                  temp.job_id = jid
+                  temp.job_title = job_det[jid].name
+                  temp.candidate_id = app_can[jid][i]._id
+                  temp.candidate_name = app_can[jid][i].firstName + ' ' + app_can[jid][i].lastName
+                  temp.phone = app_can[jid][i].phoneNumber
+                  app_can_data.push(temp)
+            }
+      }
+
+        setTable_applied((prevState) => ({
+          ...prevState,
+
+          data: app_can_data,
+        }));
+        setLoading_Applied(false);
     }
-
     getjobs()
     
 
@@ -67,7 +88,7 @@ const Dashboard = () => {
 
   
 
-  if (isLoading_jobs_list ) {
+  if (isLoading_jobs_list || isLoading_applied ) {
     return <div className="main">Loading...</div>;
   }
 
@@ -98,11 +119,11 @@ const Dashboard = () => {
                   </DataTableExtensions>
                 </Tab>
 
-                {/* <Tab eventKey="app_jobs" title="Applied Jobs">
-                  <DataTableExtensions {...table_jobs_applied}>
+                <Tab eventKey="app_jobs" title="Applied Jobs">
+                  <DataTableExtensions {...table_applied}>
                     <DataTable
-                      columns1={table_jobs_applied.columns}
-                      data1={table_jobs_applied.data}
+                      columns1={table_applied.columns}
+                      data1={table_applied.data}
                       noHeader
                       defaultSortField="id"
                       defaultSortAsc={false}
@@ -111,7 +132,7 @@ const Dashboard = () => {
                       onRowClicked={(row) => view_job(row._id)}
                     />
                   </DataTableExtensions>
-                </Tab> */}
+                </Tab>
 
               </Tabs>
             </div>

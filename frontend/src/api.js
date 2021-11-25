@@ -8,3 +8,4 @@ export const JOBDETAILS = `${BASE_URL}/api/job_details`;
 //RECRUITER
 export const GETJOBS = `${BASE_URL}/api/emp_jobs`
 export const GETCOMPANY = `${BASE_URL}/api/emp_company`
+export const APP_CAN = `${BASE_URL}/api/applied_candidates`
