@@ -6,7 +6,8 @@ import DataTableExtensions from "react-data-table-component-extensions";
 import "react-data-table-component-extensions/dist/index.css";
 import { jobs_list_columns, jobs_list_data } from "./recruiter_data";
 import HeaderRecruiter from "./recruiter_header"
-// import { PRODUCT_LIST, TOP_PRODUCTS } from "../../api";
+import { GETALLJOBS } from "../../api";
+import "../../css/recruiter_dashboard.css"
 
 const Dashboard = () => {
   const [isLoading_jobs_list, setLoading_jobs_list] = useState(true);
@@ -15,24 +16,22 @@ const Dashboard = () => {
     data: {},
   });
 
+  const view_job = (job_id) =>
+  {
+    window.location = "/view_job?job_id=" + job_id;
+  }
+
 
   useEffect(() => {
     // List Jobs
-//     axios.get(JOBS_API).then((response) => {
-//       setTable_top_products_list((prevState) => ({
-//         ...prevState,
+    axios.get(GETALLJOBS).then((response) => {
+      setTable_jobs_list((prevState) => ({
+        ...prevState,
 
-//         data: response.data,
-//       }));
-//       setLoading_jobs_list(false);
-//     });
-
-    setTable_jobs_list((prevState) => ({
-      ...prevState,
-
-      data: jobs_list_data,
+        data: response.data,
       }));
       setLoading_jobs_list(false);
+    });
 
   }, []);
 
@@ -64,6 +63,7 @@ const Dashboard = () => {
                       defaultSortAsc={false}
                       pagination
                       highlightOnHover
+                      onRowClicked={(row) => view_job(row._id)}
                     />
                   </DataTableExtensions>
                 </Tab>

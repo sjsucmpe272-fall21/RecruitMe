@@ -1,7 +1,7 @@
 const Candidate = require("../Models/CandidateSchema");
 const Job = require("../Models/JobSchema");
 const FormattedJobData = require("../Models/FormattedJobData");
-const client = require('../elasticsearch/connection');
+// const client = require('../elasticsearch/connection');
 const { 
     LinkedinScraper,
     relevanceFilter,

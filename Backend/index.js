@@ -5,24 +5,25 @@ const app = express();
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 var passport = require('passport');
-const client = require('./elasticsearch/connection');
+// const client = require('./elasticsearch/connection');
 
 const employerRoutes = require("./Routes/employerRoute");
 const loginRoute = require("./Routes/loginRoute");
 const logoutRoute = require("./Routes/logoutRoute");
 const candidateRoutes = require("./Routes/candidateRoute");
+const jobRoutes = require("./Routes/jobRoute");
 
 const env = process.env.NODE_ENV || 'development';
 
-client.ping(
-    function(error) {
-      if (error) {
-          console.error('Elasticsearch cluster is down!');
-      } else {
-          console.log('Elasticsearch is connected');  
-      }
-    }
-  );
+// client.ping(
+//     function(error) {
+//       if (error) {
+//           console.error('Elasticsearch cluster is down!');
+//       } else {
+//           console.log('Elasticsearch is connected');  
+//       }
+//     }
+//   );
 
 mongoose.connect(process.env.DATABASE, {
         useNewUrlParser: true
@@ -55,5 +56,6 @@ app.use("/api", employerRoutes);
 app.use("/", loginRoute);
 app.use("/", logoutRoute);
 app.use("/api", candidateRoutes);
+app.use("/api", jobRoutes);
 
 module.exports = app;
