@@ -89,3 +89,17 @@ exports.delete_job = (req,res) =>
         }
     })
 }
+
+
+exports.get_job_details = (req,res) =>
+{
+    return Job.find({_id: req.body.job_id}).exec(function(err, result) {
+        if (err) {
+            res.render('error', {
+                status: 500
+            });
+        } else {
+            res.json(result);
+        }
+    });
+}

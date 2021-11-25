@@ -50,7 +50,7 @@ exports.withdraw_job = (req,res) =>
     })
 }
 
-exports.getCandidateProfile = ()=> {
+exports.getCandidateProfile = (req)=> {
     var candidateId = req.body.candidateId;
 
     return Candidate.find({_id: candidateId})
@@ -222,4 +222,17 @@ exports.getSuitableJobs = async (req,res)=>{
       .catch((err)=>{
           console.log("ERROR IS "+err);
       })
+}
+
+exports.getcandidateprof = async (req,res) =>
+{
+    return Candidate.find({_id: req.body.candidate_id}).exec(function(err, models) {
+        if (err) {
+            res.render('error', {
+                status: 500
+            });
+        } else {
+            res.json(models);
+        }
+    });
 }

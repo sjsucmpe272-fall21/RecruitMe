@@ -10,6 +10,7 @@ import CandidateRoute from "./authHelper/CandidateRoute"
 import TinderCardsForCandidates from "./Components/TinderCardsForCandidates"
 import NewJobList from './Components/NewJobList';
 import RecruiterDashboard from './Components/recruiter_dashboard/recruiter_dashboard'
+import CandidateDashboard from './Components/candidate_dashboard/candidate_dashboard'
 
 function App() {
   return (
@@ -35,6 +36,9 @@ function App() {
           </Route>
           <Route exact path="/recruiter_dashboard">
             <RecruiterDashboard />
+          </Route>
+          <Route exact path="/candidate_dashboard">
+            <CandidateDashboard />
           </Route>
           {/* <CandidateRoute path="/">
             <TinderCards user="candidate"/>

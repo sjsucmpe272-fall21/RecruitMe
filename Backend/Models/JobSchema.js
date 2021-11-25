@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 const CompanySchema = require("./CompanySchema");
-const CandidateSchema = require("./CandidateSchema").schema
+const CandidateSchema = require("./CandidateSchema")
 
 var jobSchema = new mongoose.Schema(
     {
@@ -59,7 +59,7 @@ var jobSchema = new mongoose.Schema(
     formattedData:{
       type:String
     }
-      // candidatesApplied : [CandidateSchema],
+      // candidatesApplied : [CandidateSchema]
       // candidatesSelected : [CandidateSchema]
     }
 )

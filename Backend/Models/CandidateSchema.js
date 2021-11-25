@@ -1,4 +1,5 @@
 var mongoose = require("mongoose");
+// const JobSchema = require("./JobSchema")
 
 var candidateSchema = new mongoose.Schema(
     {
@@ -52,7 +53,11 @@ var candidateSchema = new mongoose.Schema(
           type: Number,
           maxlength: 50,
           trim: true
-      }
+      },
+      jobsAppliedTo: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Job'
+      }]
     }
 )
 
