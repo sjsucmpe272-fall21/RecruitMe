@@ -58,9 +58,15 @@ var jobSchema = new mongoose.Schema(
     },
     formattedData:{
       type:String
-    }
-      // candidatesApplied : [CandidateSchema]
-      // candidatesSelected : [CandidateSchema]
+    },
+    candidates_applied: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Candidate'
+      }],
+    candidates_selected: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Candidate'
+      }]
     }
 )
 

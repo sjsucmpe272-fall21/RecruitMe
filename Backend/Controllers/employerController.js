@@ -51,3 +51,35 @@ exports.reject_candidate = (req,res) =>
         }
     })
 }
+
+exports.get_company = async (req,res) =>
+{
+    return Employer.find({email: req.body.email}).exec(function(err, result) {
+        if (err) 
+        {
+            res.render('error', {
+                status: 500
+            });
+        } 
+        else 
+        {
+            res.json(result)
+        }
+    });
+}
+
+exports.get_jobs = async (req,res) =>
+{
+    return Job.find({company: req.body.company}).exec(function(err, result) {
+        if (err) 
+        {
+            res.render('error', {
+                status: 500
+            });
+        } 
+        else 
+        {
+            res.json(result)
+        }
+    });
+}

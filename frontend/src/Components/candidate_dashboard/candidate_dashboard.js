@@ -7,7 +7,7 @@ import "react-data-table-component-extensions/dist/index.css";
 import { jobs_list_columns, jobs_list_data } from "./candidate_data";
 import CandidateHeader from "./candidate_header"
 import { GETALLJOBS, GETCANDIDATEPROFILE, JOBDETAILS } from "../../api";
-import "../../css/recruiter_dashboard.css"
+import "../../css/candidate_dashboard.css"
 
 const Dashboard = () => {
   const [isLoading_jobs_list, setLoading_jobs_list] = useState(true);
@@ -62,11 +62,6 @@ const Dashboard = () => {
       
       Promise.all(promises).then(() => 
       {
-        // console.log(job_details)
-        // for (let i=0; i<job_details[0].length; i++)
-        // {
-        //   setApplied_data( arr => [...arr, job_details[i]]);
-        // }
         let job_det = []
         for (let i=0; i<job_details.length; i++)
         {
