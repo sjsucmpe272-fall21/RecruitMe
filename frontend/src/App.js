@@ -19,20 +19,23 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <Route exact path="/">
+          {/* <Route exact path="/">
             <Login />
-          </Route>
-          <Route exact path="/login">
-            <Login />
-          </Route>
-          <Route exact path="/chat">
-          </Route>
-          <Route exact path="/candidate">
+          // </Route> */}
+          // <Route exact path="/login">
+          //   <Login />
+          // </Route>
+          // <Route exact path="/chat">
+          // </Route>
+          {/* <RecruiterRoute exact path="/home">
+            <TinderCards user="recruiter"/>
+          </RecruiterRoute> */}
+           <Route exact path="/">
             <TinderCardsForCandidates/>
           </Route>
-          <RecruiterRoute exact path="/home">
-            <TinderCards user="recruiter"/>
-          </RecruiterRoute>
+          {/* <Route exact path="/">
+            <TinderCards/>
+          </Route> */}
           <Route exact path="/newJobs">
             <NewJobList />
           </Route>
