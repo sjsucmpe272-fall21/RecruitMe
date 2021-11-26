@@ -5,6 +5,8 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from 'react-responsive-carousel';
 import Header from './Header';
 import axios from 'axios';
+import {SelectJob} from '../Components/api_calls/CandidateApiCalls'
+
 function TinderCardsForCandidates() {
     const [allJobs, setAllJobs] = useState([]);
     const [lastDirection, setLastDirection] = useState()
@@ -24,7 +26,7 @@ function TinderCardsForCandidates() {
     const swiped = (direction, id) => {
         if(direction=="right")
         {
-            // SelectCandidate({"_id":"2795966449", "candidate_id":id});
+             SelectJob({"job_id":id, "candidate_id":"619ef6b4904142342a65a662"});
         }
         setLastDirection(direction);
       }
