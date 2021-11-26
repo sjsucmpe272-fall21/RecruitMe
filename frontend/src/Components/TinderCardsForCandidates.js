@@ -36,7 +36,7 @@ function TinderCardsForCandidates() {
         <Header />
         <div>
             <div className="tinderCards__cardContainer">
-                {allJobs.map((job) => {
+                {allJobs.slice(0).reverse().map((job) => {
                     return <TinderCard className="swipe" key={job._id} onSwipe={(dir) => swiped(dir, job._id)}
                     preventSwipe={['up', 'down']}>
                         <div
