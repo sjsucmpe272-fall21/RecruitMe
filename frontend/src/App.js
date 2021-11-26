@@ -3,7 +3,7 @@ import Header from './Components/Header'
 import {BrowserRouter as Router,Switch, Route, Link} from "react-router-dom"
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import Login from './Components/Login';
+import Login from './Components/login';
 import TinderCards from "./Components/TinderCards"
 import RecruiterRoute from "./authHelper/RecruiterRoute"
 import CandidateRoute from "./authHelper/CandidateRoute"
