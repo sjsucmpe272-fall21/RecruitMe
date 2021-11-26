@@ -1,4 +1,6 @@
 const Job = require("../Models/JobSchema");
+const Candidate = require("../Models/CandidateSchema");
+var mongoose = require('mongoose'); 
 
 exports.getAllJobs = (req, res)=> {
 
@@ -102,4 +104,73 @@ exports.get_job_details = (req,res) =>
             res.json(result);
         }
     });
+}
+
+exports.sel_can = async (req,res) =>
+{
+    let job = await Job.find({_id: req.body.job_id})
+    let job_doc = job[0]
+    if (!('candidates_selected' in job_doc))
+    {
+        job_doc['candidates_selected'] = []
+        job_doc.save()
+    }
+
+    if (job_doc.candidates_selected.indexOf(req.body.candidate_id) == -1)
+    {
+        job_doc.candidates_selected.push(req.body.candidate_id)
+        job_doc.save()
+    }
+
+    let candidate = await Candidate.find({_id: req.body.candidate_id})
+    let candidate_doc = candidate[0]
+    if (!('jobsSelected' in candidate_doc))
+    {
+        candidate_doc['jobsSelected'] = []
+        candidate_doc.save()
+    }
+
+    if (candidate_doc.jobsSelected.indexOf(req.body.job_id) == -1)
+    {
+        candidate_doc.jobsSelected.push(req.body.job_id)
+        candidate_doc.save()
+    }
+    
+    res.send(job_doc)
+}
+
+
+exports.rej_can = async (req,res) =>
+{
+    let job = await Job.find({_id: req.body.job_id})
+    let job_doc = job[0]
+    if (('candidates_selected' in job_doc))
+    {
+        if (job_doc.candidates_selected.indexOf(req.body.candidate_id) != -1)
+        {
+            job_doc.candidates_selected = job_doc.candidates_selected.filter((c) =>
+            {
+                return c != req.body.candidate_id
+            })
+            job_doc.save()
+        }
+    }
+
+    
+
+    let candidate = await Candidate.find({_id: req.body.candidate_id})
+    let candidate_doc = candidate[0]
+    if (('jobsSelected' in candidate_doc))
+    {
+        if (candidate_doc.jobsSelected.indexOf(req.body.job_id) != -1)
+        {
+            candidate_doc.jobsSelected = candidate_doc.jobsSelected.filter((j) =>
+            {
+                return j != req.body.job_id
+            })
+            candidate_doc.save()
+        }
+    }
+    
+    res.send(job_doc)
 }

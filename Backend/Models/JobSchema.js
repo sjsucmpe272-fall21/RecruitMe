@@ -60,12 +60,14 @@ var jobSchema = new mongoose.Schema(
       type:String
     },
     candidates_applied: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Candidate'
+          type: String,
+          required: true,
+          maxlength: 100
       }],
     candidates_selected: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Candidate'
+          type: String,
+          required: true,
+          maxlength: 100
       }]
     }
 )

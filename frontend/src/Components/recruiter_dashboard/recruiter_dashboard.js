@@ -124,7 +124,7 @@ const Dashboard = () => {
                   </DataTableExtensions>
                 </Tab>
 
-                <Tab eventKey="app_jobs" title="Applied Jobs">
+                <Tab eventKey="app_jobs" title="Applied Candidates">
                   <DataTableExtensions {...table_applied}>
                     <DataTable
                       columns1={table_applied.columns}

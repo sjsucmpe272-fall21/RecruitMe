@@ -12,6 +12,7 @@ import NewJobList from './Components/NewJobList';
 import RecruiterDashboard from './Components/recruiter_dashboard/recruiter_dashboard'
 import CandidateDashboard from './Components/candidate_dashboard/candidate_dashboard'
 import ViewJob from './Components/job/view_job'
+import SELREJ from './Components/candidate/sel_rej'
 
 function App() {
   return (
@@ -43,6 +44,9 @@ function App() {
           </Route>
           <Route exact path="/view_job">
             <ViewJob />
+          </Route>
+          <Route exact path="/sel_rej_can">
+            <SELREJ />
           </Route>
           {/* <CandidateRoute path="/">
             <TinderCards user="candidate"/>
