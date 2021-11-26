@@ -26,6 +26,11 @@ const Dashboard = () => {
     window.location = "/view_job?job_id=" + job_id;
   }
 
+  const view_candidate = (row) =>
+  {
+    window.location = "/sel_rej_can?candidate_id=" + row.candidate_id + "&&job_id=" + row.job_id
+  }
+
 
   useEffect(() => {
     // List Jobs
@@ -129,7 +134,7 @@ const Dashboard = () => {
                       defaultSortAsc={false}
                       pagination
                       highlightOnHover
-                      onRowClicked={(row) => view_job(row._id)}
+                      onRowClicked={(row) => view_candidate(row)}
                     />
                   </DataTableExtensions>
                 </Tab>
