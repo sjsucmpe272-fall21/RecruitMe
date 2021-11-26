@@ -236,3 +236,46 @@ exports.getcandidateprof = async (req,res) =>
         }
     });
 }
+
+// Use this api to apply for a job
+// Pass body as {'candidate_id':value,'job_id':value}
+// This api can be accessed as /api/job_apply url
+exports.job_apply = async (req,res) =>
+{
+    try
+    {
+        let job = await Job.find({_id: req.query.job_id})
+        let job_doc = job[0]
+        if (!('candidates_applied' in job_doc))
+        {
+            job_doc['candidates_applied'] = []
+            job_doc.save()
+        }
+
+        if (job_doc.candidates_applied.indexOf(req.query.candidate_id) == -1)
+        {
+            job_doc.candidates_applied.push(req.query.candidate_id)
+            job_doc.save()
+        }
+
+        let candidate = await Candidate.find({_id: req.query.candidate_id})
+        let candidate_doc = candidate[0]
+        if (!('jobsAppliedTo' in candidate_doc))
+        {
+            candidate_doc['jobsAppliedTo'] = []
+            candidate_doc.save()
+        }
+
+        if (candidate_doc.jobsAppliedTo.indexOf(req.query.job_id) == -1)
+        {
+            candidate_doc.jobsAppliedTo.push(req.query.job_id)
+            candidate_doc.save()
+        }
+        res.send(candidate)
+    }
+    catch
+    {
+        res.send("error")
+    }
+    
+}

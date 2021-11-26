@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { JOBDETAILS, GETCANDIDATEPROFILE, SEL_CAN, REJ_CAN } from "../../api";
+import { JOBDETAILS, GETCANDIDATEPROFILE, SELECT_CAN, REJECT_CAN } from "../../api";
 import "../../css/view_job.css"
 
 const ViewJob = () => {
@@ -28,15 +28,17 @@ const ViewJob = () => {
     const select_can = async () =>
     {
         const payload = {'job_id':jid,'candidate_id':can_id}
-        let selected = await axios.post(SEL_CAN,payload)
-        console.log(selected)
+        let selected = await axios.post(SELECT_CAN,payload)
+        alert("Candidate Selected!")
+        window.location = "/recruiter_dashboard"  
     }
 
     const reject_can = async () =>
     {
         const payload = {'job_id':jid,'candidate_id':can_id}
-        let rejected = await axios.post(REJ_CAN,payload)
-        console.log(rejected)
+        let rejected = await axios.post(REJECT_CAN,payload)
+        alert("Candidate Rejected!")
+        window.location = "/recruiter_dashboard"
     }
   
     useEffect(() => {

@@ -6,17 +6,22 @@ import DataTableExtensions from "react-data-table-component-extensions";
 import "react-data-table-component-extensions/dist/index.css";
 import { jobs_list_columns, applied_columns } from "./recruiter_data";
 import HeaderRecruiter from "./recruiter_header"
-import { GETCOMPANY, GETJOBS, APP_CAN} from "../../api";
+import { GETCOMPANY, GETJOBS, APP_CAN, SEL_CAN } from "../../api";
 import "../../css/recruiter_dashboard.css"
 
 const Dashboard = () => {
   const [isLoading_jobs_list, setLoading_jobs_list] = useState(true);
   const [isLoading_applied, setLoading_Applied] = useState(true);
+  const [isLoading_selected, setLoading_Selected] = useState(true);
   const [table_jobs_list, setTable_jobs_list] = useState({
     columns: jobs_list_columns,
     data: {},
   });
   const [table_applied, setTable_applied] = useState({
+    columns: applied_columns,
+    data: {},
+  });
+  const [table_selected, setTable_selected] = useState({
     columns: applied_columns,
     data: {},
   });
@@ -43,6 +48,7 @@ const Dashboard = () => {
       // get all jobs for this company
       let jobs_response = await  axios.post(GETJOBS,{'company':company})
       let jobs = jobs_response.data
+      
 
         setTable_jobs_list((prevState) => ({
         ...prevState,
@@ -52,7 +58,7 @@ const Dashboard = () => {
       setLoading_jobs_list(false);
 
       let job_det = {}
-      // get applied candidate's names
+      // get applied and selected candidate's names
       let applied_candidates = {}
       for (let i=0; i<jobs.length; i++)
       {
@@ -61,6 +67,17 @@ const Dashboard = () => {
         job_det[jobid] = jobs[i]
       }
 
+      let selected_candidates = {}
+      for (let i=0; i<jobs.length; i++)
+      {
+        let jobid = jobs[i]._id
+        selected_candidates[jobid] = jobs[i].candidates_selected
+        job_det[jobid] = jobs[i]
+      }
+      console.log(selected_candidates)
+
+
+      // Data for applied candidates
       let app_can_response = await axios.post(APP_CAN,applied_candidates)
       let app_can = app_can_response.data
 
@@ -85,6 +102,36 @@ const Dashboard = () => {
           data: app_can_data,
         }));
         setLoading_Applied(false);
+        
+
+        // Data for selected candidates
+      let app_sel_response = await axios.post(SEL_CAN,selected_candidates)
+      let app_sel = app_sel_response.data
+      console.log(app_sel)
+
+      let app_sel_data = []
+      for (let jid in app_sel)
+      {
+            for (let i=0; i<app_sel[jid].length; i++)
+            {
+                  let temp = {}
+                  temp.job_id = jid
+                  temp.job_title = job_det[jid].name
+                  temp.candidate_id = app_sel[jid][i]._id
+                  temp.candidate_name = app_sel[jid][i].firstName + ' ' + app_sel[jid][i].lastName
+                  temp.phone = app_sel[jid][i].phoneNumber
+                  app_sel_data.push(temp)
+            } 
+      }
+
+      setTable_selected((prevState) => ({
+          ...prevState,
+
+          data: app_sel_data,
+        }));
+        setLoading_Selected(false);
+        console.log(app_sel_data)
+
     }
     getjobs()
     
@@ -93,7 +140,7 @@ const Dashboard = () => {
 
   
 
-  if (isLoading_jobs_list || isLoading_applied ) {
+  if (isLoading_jobs_list || isLoading_applied || isLoading_selected ) {
     return <div className="main">Loading...</div>;
   }
 
@@ -124,11 +171,26 @@ const Dashboard = () => {
                   </DataTableExtensions>
                 </Tab>
 
-                <Tab eventKey="app_jobs" title="Applied Candidates">
+                <Tab eventKey="app_can" title="Applied Candidates">
                   <DataTableExtensions {...table_applied}>
                     <DataTable
                       columns1={table_applied.columns}
                       data1={table_applied.data}
+                      noHeader
+                      defaultSortField="id"
+                      defaultSortAsc={false}
+                      pagination
+                      highlightOnHover
+                      onRowClicked={(row) => view_candidate(row)}
+                    />
+                  </DataTableExtensions>
+                </Tab>
+
+                <Tab eventKey="sel_can" title="Selected Candidates">
+                  <DataTableExtensions {...table_selected}>
+                    <DataTable
+                      columns1={table_selected.columns}
+                      data1={table_selected.data}
                       noHeader
                       defaultSortField="id"
                       defaultSortAsc={false}

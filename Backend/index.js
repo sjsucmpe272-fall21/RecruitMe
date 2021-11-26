@@ -56,6 +56,6 @@ app.use("/api", employerRoutes);
 app.use("/", loginRoute);
 app.use("/", logoutRoute);
 app.use("/api", candidateRoutes);
-app.use("/api", jobRoutes);
+app.use("/", jobRoutes);
 
 module.exports = app;
