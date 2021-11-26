@@ -19,7 +19,7 @@ exports.getEmployerProfile = ()=> {
 
 exports.select_candidate = (req,res) =>
 {
-    Job.findById(req.body.job_id, (err,doc) => 
+    Job.findById(req.body._id, (err,doc) => 
     {
         if (err)
         {
@@ -27,7 +27,7 @@ exports.select_candidate = (req,res) =>
         }
         else
         {
-            doc.candidatesSelected.push(req.body.candidate_id)
+            doc.candidates_selected.push(req.body.candidate_id)
             doc.save()
         }
     })
