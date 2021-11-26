@@ -29,13 +29,15 @@ const ViewJob = () => {
     {
         const payload = {'job_id':jid,'candidate_id':can_id}
         let selected = await axios.post(SELECT_CAN,payload)
-        window.location = "/recruiter_dashboard"
+        alert("Candidate Selected!")
+        window.location = "/recruiter_dashboard"  
     }
 
     const reject_can = async () =>
     {
         const payload = {'job_id':jid,'candidate_id':can_id}
         let rejected = await axios.post(REJECT_CAN,payload)
+        alert("Candidate Rejected!")
         window.location = "/recruiter_dashboard"
     }
   
