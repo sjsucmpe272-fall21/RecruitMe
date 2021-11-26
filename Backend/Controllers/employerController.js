@@ -100,5 +100,21 @@ exports.get_applied_candidates = async (req,res) =>
         }
     }
     res.send(app_can)
+}
 
+exports.get_selected_candidates = async (req,res) =>
+{
+    let sel_can = {}
+    for (job_id in req.body)
+    {
+        sel_can[job_id] = []
+        let candidates = req.body[job_id]
+        for (i in candidates)
+        {
+            let candidate_id = candidates[i]
+            let candidate = await Candidate.find({_id:candidate_id})
+            sel_can[job_id].push(candidate[0])
+        }
+    }
+    res.send(sel_can)
 }

@@ -12,11 +12,16 @@ import "../../css/candidate_dashboard.css"
 const Dashboard = () => {
   const [isLoading_jobs_list, setLoading_jobs_list] = useState(true);
   const [isLoading_applied_jobs, setLoading_Applied_jobs] = useState(true);
+  const [isLoading_offers, setLoading_Offers] = useState(true);
   const [table_jobs_list, setTable_jobs_list] = useState({
     columns: jobs_list_columns,
     data: {},
   });
   const [table_jobs_applied, setTable_jobs_applied] = useState({
+    columns: jobs_list_columns,
+    data: {},
+  });
+  const [table_offers, setTable_offers] = useState({
     columns: jobs_list_columns,
     data: {},
   });
@@ -47,6 +52,24 @@ const Dashboard = () => {
       let job_ids;
 
       const [candidate] = await Promise.all([axios.post(GETCANDIDATEPROFILE,payload)])
+
+        // Get offers data
+        let jobs_selected = candidate.data[0].jobsSelected
+
+        let offers = []
+        for (let i=0; i<jobs_selected.length; i++)
+        {
+          let selected_jobs_response = await axios.post(JOBDETAILS,{'job_id':jobs_selected[i]})
+          offers.push(selected_jobs_response.data[0])
+        }
+        setTable_offers((prevState) => ({
+          ...prevState,
+  
+          data: offers,
+        }));
+        
+        setLoading_Offers(false);
+        
 
       job_ids = candidate.data[0].jobsAppliedTo
       let promises = []
@@ -84,7 +107,7 @@ const Dashboard = () => {
 
   
 
-  if (isLoading_jobs_list || isLoading_applied_jobs ) {
+  if (isLoading_jobs_list || isLoading_applied_jobs || isLoading_offers ) {
     return <div className="main">Loading...</div>;
   }
 
@@ -120,6 +143,21 @@ const Dashboard = () => {
                     <DataTable
                       columns1={table_jobs_applied.columns}
                       data1={table_jobs_applied.data}
+                      noHeader
+                      defaultSortField="id"
+                      defaultSortAsc={false}
+                      pagination
+                      highlightOnHover
+                      onRowClicked={(row) => view_job(row._id)}
+                    />
+                  </DataTableExtensions>
+                </Tab>
+
+                <Tab eventKey="offers" title="Offers">
+                  <DataTableExtensions {...table_offers}>
+                    <DataTable
+                      columns1={table_offers.columns}
+                      data1={table_offers.data}
                       noHeader
                       defaultSortField="id"
                       defaultSortAsc={false}
