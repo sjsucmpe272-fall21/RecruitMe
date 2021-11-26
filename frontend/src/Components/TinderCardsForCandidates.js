@@ -13,10 +13,10 @@ function TinderCardsForCandidates() {
 
     useEffect(() => {
         // axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
-        axios.get('http://localhost:8001/api/jobs')
+        axios.get('http://localhost:8001/api/getSuitableJobs')
             .then(response => {
-                console.log(response);
-                setAllJobs(response.data);
+                console.log(response.data.body.hits.hits);
+                setAllJobs(response.data.body.hits.hits);
             })
             .catch(err => {
                 console.log('error ', err);
@@ -41,11 +41,11 @@ function TinderCardsForCandidates() {
                     preventSwipe={['up', 'down']}>
                         <div
                             className="card">
-                            <h1>{job.company}</h1>
-                            <p>{job.industries}</p>
-                            <p>{job.jobDescription.substring(0,815)}</p>
-                            <a href={job.applylink}></a>
-                            <h1>{job.jobLocation}</h1>
+                            <h1>{job._source.company}</h1>
+                            <p>{job._source.industries}</p>
+                            <p>{job._source.jobDescription.substring(0,720)}</p>
+                            <a href={job._source.applyLink}>Apply Link</a>
+                            <h1>{job._source.jobLocation}</h1>
                         </div>
                     </TinderCard>
                 })}
