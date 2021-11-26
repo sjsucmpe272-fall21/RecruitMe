@@ -68,7 +68,11 @@ var jobSchema = new mongoose.Schema(
           type: String,
           required: true,
           maxlength: 100
-      }]
+      }],
+      employer : {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Employer'
+      }
     }
 )
 
