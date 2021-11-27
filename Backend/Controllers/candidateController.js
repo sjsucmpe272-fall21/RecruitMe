@@ -210,11 +210,24 @@ exports.getSuitableJobs = async (req,res)=>{
     await client.search({
         index: 'jobs',
         body: {
-          query: {
-            match: {
-                jobDescription: 'Electronics engineer'
-            }
-          }
+            query: {
+                
+                bool: {
+                    must_not: [
+                        {term: {
+                        candidates_applied: {
+                            value: "1234"
+                        }
+                        }}
+                    ],
+                    should: {
+                        match: {
+                            jobDescription: 'Electronics engineer'
+                        }
+                    }
+                }
+                
+            },
         }
       })
       .then((resp)=>{
@@ -237,6 +250,10 @@ exports.getSimilarJobs = async (req,res)=>{
                 min_doc_freq : 5,
                 max_query_terms: 20 
             }
+          },
+          script:{
+            lang: "painless",
+            source: "if(ctx._source.candidates_applied.indexOf(1234)==-1)ctx._source.candidates_applied.add(1234)"
           }
         }
       })
@@ -260,12 +277,6 @@ exports.getcandidateprof = async (req,res) =>
             res.json(models);
         }
     });
-}
-const queryString = (ctx)=>{
-    if (ctx._source.candidates_applied==null)
-        return " ctx._source.candidates_applied = new ArrayList(); ctx._source.candidates_applied.add(1234);"
-    else
-        return "ctx._source.candidates_applied.add(1234);"
 }
 // Use this api to apply for a job
 // Pass body as {'candidate_id':value,'job_id':value}
