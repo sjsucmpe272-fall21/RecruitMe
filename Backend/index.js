@@ -12,6 +12,9 @@ const loginRoute = require("./Routes/loginRoute");
 const logoutRoute = require("./Routes/logoutRoute");
 const candidateRoutes = require("./Routes/candidateRoute");
 const jobRoutes = require("./Routes/jobRoute");
+const uploadRoute = require('./Routes/uploadRoute');
+const signupRoute = require('./Routes/signupRoute');
+
 
 const env = process.env.NODE_ENV || 'development';
 
@@ -57,5 +60,7 @@ app.use("/", loginRoute);
 app.use("/", logoutRoute);
 app.use("/api", candidateRoutes);
 app.use("/", jobRoutes);
+app.use("/", uploadRoute);
+app.use("/", signupRoute);
 
 module.exports = app;

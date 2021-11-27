@@ -13,6 +13,7 @@ import RecruiterDashboard from './Components/recruiter_dashboard/recruiter_dashb
 import CandidateDashboard from './Components/candidate_dashboard/candidate_dashboard'
 import ViewJob from './Components/job/view_job'
 import SELREJ from './Components/candidate/sel_rej'
+import CandidateSignUp from './Components/Signup/CandidateSignup';
 
 function App() {
   return (
@@ -50,6 +51,9 @@ function App() {
           </Route>
           <Route exact path="/sel_rej_can">
             <SELREJ />
+          </Route>
+          <Route exact path="/candidateSignup">
+            <CandidateSignUp />
           </Route>
           {/* <CandidateRoute path="/">
             <TinderCards user="candidate"/>

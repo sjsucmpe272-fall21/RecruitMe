@@ -21,6 +21,12 @@ var candidateSchema = new mongoose.Schema(
         maxlength: 100,
         trim: true
       },
+      encry_password: {
+        type: String,
+        required: true,
+        maxlength: 100,
+        trim: true
+      },
       phoneNumber: {
         type: String,
         required: true,
@@ -56,14 +62,18 @@ var candidateSchema = new mongoose.Schema(
       },
       jobsAppliedTo: [{
           type: String,
-          required: true,
+          // required: true,
           maxlength: 100
       }],
       jobsSelected: [{
           type: String,
-          required: true,
+          // required: true,
           maxlength: 100
-  }]
+      }],
+      skills: [{
+        type: Array,
+        required: true
+      }]
     }
 )
 

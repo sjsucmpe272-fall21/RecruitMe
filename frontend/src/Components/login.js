@@ -29,7 +29,7 @@ function Login(props) {
     return (
         <div className="container my-5" style={{maxWidth: '25rem'}}>
             {localStorage.getItem('token') ? <Redirect to='/home' /> : null}
-                <div className="col card" style={{maxWidth: '25rem'}}>
+                <div className="col card border-danger" style={{maxWidth: '23rem'}}>
                     <div className="card-body align-middle">
                         <h5 className="card-title">Login</h5>
 
@@ -84,7 +84,7 @@ function Login(props) {
                                         {/* <ErrorMessage name="acco" component="div" /> */}
                                         {/* <input type="password" className="form-control" id="password" name="password" placeholder="Password" required /> */}
                                     </div>
-                                    <div className="row mt-5 justify-content-center">
+                                    <div className="row mt-4 justify-content-center">
                                         <button type="submit" className="btn btn-danger" disabled={isSubmitting}>
                                             Submit
                                         </button>
@@ -92,15 +92,13 @@ function Login(props) {
                                 </Form>
                             )}
                         </Formik>
-                    </div>
-                    <div className="row justify-content-center">
-                        <div className="col-8">
-                            <Link to="/JobseekerSignUp">New Jobseeker? Sign up here</Link>
-                        </div>
-                    </div>
-                    <div className="row justify-content-center">
-                        <div className="col-8">
-                            <Link to="/EmployerSignUp">New Employer? Sign up here</Link>
+                        <div className="row align-self-center">
+                            <div className="mt-4 col">
+                                <Link to="/CandidateSignUp">New Jobseeker? Sign up here</Link>
+                            </div>
+                            <div className="mt-4 col">
+                                <Link to="/EmployerSignUp">New Employer? Sign up here</Link>
+                            </div>
                         </div>
                     </div>
                 </div>
