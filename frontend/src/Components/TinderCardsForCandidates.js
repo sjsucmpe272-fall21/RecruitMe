@@ -5,10 +5,11 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from 'react-responsive-carousel';
 import Header from './Header';
 import axios from 'axios';
-import {SelectJob} from '../Components/api_calls/CandidateApiCalls'
+import {SelectJob,GetSimilarJobs} from '../Components/api_calls/CandidateApiCalls'
 
 function TinderCardsForCandidates() {
     const [allJobs, setAllJobs] = useState([]);
+    const [similarJobs, setSimilarJobs] = useState([]);
     const [lastDirection, setLastDirection] = useState()
 
     useEffect(() => {
@@ -27,6 +28,15 @@ function TinderCardsForCandidates() {
         if(direction=="right")
         {
              SelectJob({"job_id":id, "candidate_id":"619ef6b4904142342a65a662"});
+             GetSimilarJobs({"job_id":id})
+             .then(response=>{
+                console.log(response.data.body.hits.hits);
+                setSimilarJobs(response.data.body.hits.hits);
+                setAllJobs([...similarJobs]);
+             })
+             .catch(err => {
+                console.log('error ', err);
+            })
         }
         setLastDirection(direction);
       }

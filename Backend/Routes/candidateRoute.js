@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 const { checkAuth } = require("../Utils/auth");
 
-const{withdraw_job,getCandidateProfile,getJobs,job_apply,apply_job,getSuitableJobs,getcandidateprof} = require("../Controllers/candidateController")
-const{getSimilarJobs} = require("../Controllers/TFIDF")
+const{getSimilarJobs,withdraw_job,getCandidateProfile,getJobs,job_apply,apply_job,getSuitableJobs,getcandidateprof} = require("../Controllers/candidateController")
+//const{getSimilarJobs} = require("../Controllers/TFIDF")
 
 router.get("/getSuitableJobs",  getSuitableJobs);
 router.post("/getSimilarJobs",  getSimilarJobs);

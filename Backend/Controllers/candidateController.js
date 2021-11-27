@@ -103,6 +103,7 @@ exports.getJobs = (req,res)=>{
                 "jobFunction":data.jobFunction,
                 "jobType":data.employmentType,
                 "industries":data.industries,
+                "candidates_applied": []
             };
             
             // await client.index({ 
@@ -206,23 +207,64 @@ exports.getJobs = (req,res)=>{
 }
 
 exports.getSuitableJobs = async (req,res)=>{
-    // await client.search({
-    //     index: 'jobs',
-    //     body: {
-    //       query: {
-    //         match: {
-    //             jobDescription: 'Electronics engineer'
-    //         }
-    //       }
-    //     }
-    //   })
-    //   .then((resp)=>{
-    //       return res.json(resp);
-    //   })
-    //   .catch((err)=>{
-    //       console.log("ERROR IS "+err);
-    //   })
+    await client.search({
+        index: 'jobs',
+        body: {
+            query: {
+                
+                bool: {
+                    must_not: [
+                        {term: {
+                        candidates_applied: {
+                            value: "1234"
+                        }
+                        }}
+                    ],
+                    should: {
+                        match: {
+                            jobDescription: 'Electronics engineer'
+                        }
+                    }
+                }
+                
+            },
+        }
+      })
+      .then((resp)=>{
+          return res.json(resp);
+      })
+      .catch((err)=>{
+          console.log("ERROR IS "+err);
+      })
 }
+
+exports.getSimilarJobs = async (req,res)=>{
+    await client.search({
+        index: 'jobs',
+        body: {
+          query: {
+            more_like_this:{
+                fields: ["jobDescription"],
+                like: [{"_id":req.body.job_id}],
+                min_term_freq : 1,
+                min_doc_freq : 5,
+                max_query_terms: 20 
+            }
+          },
+          script:{
+            lang: "painless",
+            source: "if(ctx._source.candidates_applied.indexOf(1234)==-1)ctx._source.candidates_applied.add(1234)"
+          }
+        }
+      })
+      .then((resp)=>{
+          return res.json(resp);
+      })
+      .catch((err)=>{
+          console.log("ERROR IS "+err);
+      })
+}
+
 
 exports.getcandidateprof = async (req,res) =>
 {
@@ -236,7 +278,6 @@ exports.getcandidateprof = async (req,res) =>
         }
     });
 }
-
 // Use this api to apply for a job
 // Pass body as {'candidate_id':value,'job_id':value}
 // This api can be accessed as /api/job_apply url
@@ -244,7 +285,7 @@ exports.job_apply = async (req,res) =>
 {
     try
     {
-        let job = await Job.find({_id: req.query.job_id})
+        let job = await Job.find({_id: req.body.job_id})
         let job_doc = job[0]
         if (!('candidates_applied' in job_doc))
         {
@@ -252,13 +293,13 @@ exports.job_apply = async (req,res) =>
             job_doc.save()
         }
 
-        if (job_doc.candidates_applied.indexOf(req.query.candidate_id) == -1)
+        if (job_doc.candidates_applied.indexOf(req.body.candidate_id) == -1)
         {
-            job_doc.candidates_applied.push(req.query.candidate_id)
+            job_doc.candidates_applied.push(req.body.candidate_id)
             job_doc.save()
         }
 
-        let candidate = await Candidate.find({_id: req.query.candidate_id})
+        let candidate = await Candidate.find({_id: req.body.candidate_id})
         let candidate_doc = candidate[0]
         if (!('jobsAppliedTo' in candidate_doc))
         {
@@ -266,16 +307,40 @@ exports.job_apply = async (req,res) =>
             candidate_doc.save()
         }
 
-        if (candidate_doc.jobsAppliedTo.indexOf(req.query.job_id) == -1)
+        if (candidate_doc.jobsAppliedTo.indexOf(req.body.job_id) == -1)
         {
-            candidate_doc.jobsAppliedTo.push(req.query.job_id)
+            candidate_doc.jobsAppliedTo.push(req.body.job_id)
             candidate_doc.save()
         }
+
+        
+        client.updateByQuery({
+            index: "jobs",
+            body:{
+            query: {
+                terms: {
+                  _id: [ req.body.job_id ] 
+                }
+              },
+              script:{
+                lang: "painless",
+                source: "if(ctx._source.candidates_applied.indexOf(1234)==-1)ctx._source.candidates_applied.add(1234)"
+              }
+            }
+        })
+        .then(
+            function(resp) {
+                console.log("Successful update! The response was: ", resp);
+            },
+            function(err) {
+                console.trace(err.message);
+            }
+        );
         res.send(candidate)
     }
-    catch
+    catch(error)
     {
-        res.send("error")
+        res.send("error is: "+error);
     }
     
 }
