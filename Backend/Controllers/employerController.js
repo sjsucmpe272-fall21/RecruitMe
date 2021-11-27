@@ -19,7 +19,7 @@ exports.getEmployerProfile = ()=> {
 
 exports.select_candidate = (req,res) =>
 {
-    Job.findById(req.body.job_id, (err,doc) => 
+    Job.findById(req.body._id, (err,doc) => 
     {
         if (err)
         {
@@ -27,7 +27,7 @@ exports.select_candidate = (req,res) =>
         }
         else
         {
-            doc.candidatesSelected.push(req.body.candidate_id)
+            doc.candidates_selected.push(req.body.candidate_id)
             doc.save()
         }
     })
@@ -94,9 +94,17 @@ exports.get_applied_candidates = async (req,res) =>
         let candidates = req.body[job_id]
         for (i in candidates)
         {
-            let candidate_id = candidates[i]
-            let candidate = await Candidate.find({_id:candidate_id})
-            app_can[job_id].push(candidate[0])
+            try
+            {
+                let candidate_id = candidates[i]
+                let candidate = await Candidate.find({_id:candidate_id})
+                app_can[job_id].push(candidate[0])
+            }
+            catch
+            {
+                continue
+            }
+            
         }
     }
     res.send(app_can)
@@ -112,8 +120,16 @@ exports.get_selected_candidates = async (req,res) =>
         for (i in candidates)
         {
             let candidate_id = candidates[i]
-            let candidate = await Candidate.find({_id:candidate_id})
-            sel_can[job_id].push(candidate[0])
+            try
+            {
+                let candidate = await Candidate.find({_id:candidate_id})
+                sel_can[job_id].push(candidate[0])
+            }       
+            catch
+            {
+                continue
+            }
+            
         }
     }
     res.send(sel_can)

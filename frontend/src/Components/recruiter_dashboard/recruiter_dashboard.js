@@ -102,6 +102,7 @@ const Dashboard = () => {
           data: app_can_data,
         }));
         setLoading_Applied(false);
+        
 
         // Data for selected candidates
       let app_sel_response = await axios.post(SEL_CAN,selected_candidates)
@@ -129,6 +130,7 @@ const Dashboard = () => {
           data: app_sel_data,
         }));
         setLoading_Selected(false);
+        console.log(app_sel_data)
 
     }
     getjobs()
