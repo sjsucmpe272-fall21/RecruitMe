@@ -16,9 +16,7 @@ var companySchema = new mongoose.Schema(
       },
       phone: {
         type: Number,
-        required: true,
-        min: 0, 
-        max: 10
+        required: true
       },
       address: new mongoose.Schema(
         {
@@ -61,7 +59,7 @@ var companySchema = new mongoose.Schema(
         trim: true
       },
       industries: {
-        type: [String],
+        type: [Array],
         required: true,
       }
     }

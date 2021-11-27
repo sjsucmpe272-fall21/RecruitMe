@@ -1,7 +1,7 @@
 const Candidate = require("../Models/CandidateSchema");
 const Job = require("../Models/JobSchema");
 const FormattedJobData = require("../Models/FormattedJobData");
- const client = require('../elasticsearch/connection');
+//  const client = require('../elasticsearch/connection');
 const { 
     LinkedinScraper,
     relevanceFilter,
@@ -105,21 +105,21 @@ exports.getJobs = (req,res)=>{
                 "industries":data.industries,
             };
             
-            await client.index({ 
-                index: 'jobs',
-                id: data.jobId,
-                body: job
-            })
-            .then(()=>{
-                console.log("Inserted into elastic search successfully");
-            })
-            .catch((err)=>{
-                console.log("Inserted into elastic search Failed "+err);
-            })
+            // await client.index({ 
+            //     index: 'jobs',
+            //     id: data.jobId,
+            //     body: job
+            // })
+            // .then(()=>{
+            //     console.log("Inserted into elastic search successfully");
+            // })
+            // .catch((err)=>{
+            //     console.log("Inserted into elastic search Failed "+err);
+            // })
 
-            job._id = data.jobId;
-            jobs.push(job);
-            formattedJobs.push(formattedJob);
+            // job._id = data.jobId;
+            // jobs.push(job);
+            // formattedJobs.push(formattedJob);
 
         });
     
@@ -206,22 +206,22 @@ exports.getJobs = (req,res)=>{
 }
 
 exports.getSuitableJobs = async (req,res)=>{
-    await client.search({
-        index: 'jobs',
-        body: {
-          query: {
-            match: {
-                jobDescription: 'Electronics engineer'
-            }
-          }
-        }
-      })
-      .then((resp)=>{
-          return res.json(resp);
-      })
-      .catch((err)=>{
-          console.log("ERROR IS "+err);
-      })
+    // await client.search({
+    //     index: 'jobs',
+    //     body: {
+    //       query: {
+    //         match: {
+    //             jobDescription: 'Electronics engineer'
+    //         }
+    //       }
+    //     }
+    //   })
+    //   .then((resp)=>{
+    //       return res.json(resp);
+    //   })
+    //   .catch((err)=>{
+    //       console.log("ERROR IS "+err);
+    //   })
 }
 
 exports.getcandidateprof = async (req,res) =>

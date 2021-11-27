@@ -3,8 +3,8 @@ const JWTstrategy = require('passport-jwt').Strategy;
 const ExtractJWT = require('passport-jwt').ExtractJwt;
 const Candidate = require('../Models/CandidateSchema');
 const Employer = require('../Models/EmployerSchema');
+const Company = require('../Models/CompanySchema');
 const bcrypt = require('bcrypt');
-// const config = require('../config/config.json');
 
 function auth() {
     // console.log('in auth()');
@@ -16,9 +16,8 @@ function auth() {
         new JWTstrategy(options, (jwtPayload, done) => {
             console.log('in jwt auth() ');
             const userID = jwtPayload._id;
-            const isEmployer = jwtPayload.isEmployer;
-            // console.log('typeof isresto in jwt auth() ', typeof isRestaurant);
-            if(isEmployer) {
+            const userType = jwtPayload.userType;
+            if(userType === 'Employer') {
                 Employer.findById(userID, (err, results) => {
                     if(err) {
                         return done(err, false);
@@ -31,8 +30,21 @@ function auth() {
                     }
                 })
             }
-            else {
+            else if(userType === 'Candidate'){
                 Candidate.findById(userID, (err, results) => {
+                    if(err) {
+                        return done(err, false);
+                    }
+                    if(results) {
+                        return done(null, results);
+                    }
+                    else {
+                        return done(null, false);
+                    }
+                })
+            }
+            else if(userType === 'Company') {
+                Company.findById(userID, (err, results) => {
                     if(err) {
                         return done(err, false);
                     }

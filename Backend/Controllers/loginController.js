@@ -12,17 +12,20 @@ exports.login = async (req, res) => {
     console.log('in login backend req.body ', req.body);
     try {
         let user;
-        if(req.body.isEmployer) {
+        if(req.body.userType === 'Employer') {
             user = await Employer.findOne({email: req.body.email});
         }
-        else {
+        else if(req.body.userType === 'Candidate') {
             user = await Candidate.findOne({email: req.body.email});
+        }
+        else if(req.body.userType === 'Company') {
+            user = await Company.findOne({email: req.body.email});
         }
         console.log('user from db ', user);
         
         let isPasswordMatch = await bcrypt.compare(req.body.password, user.encry_password);
         if(isPasswordMatch) {
-            const payload = { _id: user._id, user: user, isEmployer: req.body.isEmployer};
+            const payload = { _id: user._id, user: user, userType: req.body.userType};
             const token = jwt.sign(payload, 'recruitme', {expiresIn: 1008000});
             res.status(200).end('Bearer '+ token);
         }

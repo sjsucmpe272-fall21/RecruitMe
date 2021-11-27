@@ -14,7 +14,7 @@ const candidateRoutes = require("./Routes/candidateRoute");
 const jobRoutes = require("./Routes/jobRoute");
 const uploadRoute = require('./Routes/uploadRoute');
 const signupRoute = require('./Routes/signupRoute');
-
+const companyRoute = require('./Routes/companyRoute');
 
 const env = process.env.NODE_ENV || 'development';
 
@@ -62,5 +62,6 @@ app.use("/api", candidateRoutes);
 app.use("/", jobRoutes);
 app.use("/", uploadRoute);
 app.use("/", signupRoute);
+app.use("/", companyRoute);
 
 module.exports = app;

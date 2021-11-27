@@ -132,7 +132,7 @@ function Login(props) {
                                 </Link>
                             </div>
                             <div className="row my-1 text-center">
-                                <Link to="/EmployerSignUp">
+                                <Link to="/CompanySignUp">
                                     <div className="align-text-bottom">
                                         Click to signup as a company
                                     </div>

@@ -18,12 +18,7 @@ exports.signup = async (req, res, done) => {
         }
 
         if(existingUser) {
-            // res.writeHead(400, {
-            //     'Content-type': 'text/plain'
-            // });
-            // res.end("User already exists!");
             res.status(400).end('User already exists!');
-            // done(null, false, {message: 'User already exists!'});
         }
 
         let saltRounds = 10;
@@ -59,42 +54,31 @@ exports.signup = async (req, res, done) => {
                 email: req.body.email,
                 name: req.body.name,
                 password: hashedPassword,
-                phone: req.body.contactno,
+                phone: Number(req.body.contactno),
                 description: req.body.description,
-                industries: req.body.industries
-            });
-
-            result.address.push({
-                street_address: req.body.street,
-                city: req.body.city,
-                state: req.body.state,
-                country: req.body.country
-            })
+                industries: req.body.industries,
+                address: {
+                    street_address: req.body.street,
+                    city: req.body.city,
+                    state: req.body.state,
+                    country: req.body.country
+                }
+            }); 
         }
 
         result.save((err, data) => {
             if(err) {
                 console.log('error in saving to db ', err);
                 res.status(500).end('Error occured in saving to db');
-                // done(err);
-                // callback(err);
             }
             else {
                 console.log('sign up successful');
                 res.status(200).end('sign up successful');
-                // done(null, data);
-                // callback(null, data);
             }
         })
     }
     catch(err) {
-        // console.log(err);
-        // res.writeHead(400, {
-        //     'Content-type': 'text/plain'
-        // });
-        // res.end("Error in query execution in finding user from DB ");
+        console.log(err);
         res.status(500).end('Error in query execution in finding user from DB ');
-        // done(err);
-        // callback(err);
     }
 }

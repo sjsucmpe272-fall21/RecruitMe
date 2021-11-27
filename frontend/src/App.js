@@ -14,23 +14,25 @@ import CandidateDashboard from './Components/candidate_dashboard/candidate_dashb
 import ViewJob from './Components/job/view_job'
 import SELREJ from './Components/candidate/sel_rej'
 import CandidateSignUp from './Components/Signup/CandidateSignup';
+import EmployerSignUp from './Components/Signup/EmployerSignup';
+import CompanySignUp from './Components/Signup/CompanySignup';
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Switch>
-          {/* <Route exact path="/">
+          <Route exact path="/">
             <Login />
-          // </Route> */}
-          // <Route exact path="/login">
-          //   <Login />
-          // </Route>
-          // <Route exact path="/chat">
-          // </Route>
-          {/* <RecruiterRoute exact path="/home">
+          </Route>
+          <Route exact path="/login">
+            <Login />
+          </Route>
+          <Route exact path="/chat">
+          </Route>
+          <RecruiterRoute exact path="/home">
             <TinderCards user="recruiter"/>
-          </RecruiterRoute> */}
+          </RecruiterRoute>
            <Route exact path="/">
             <TinderCardsForCandidates/>
           </Route>
@@ -54,6 +56,12 @@ function App() {
           </Route>
           <Route exact path="/candidateSignup">
             <CandidateSignUp />
+          </Route>
+          <Route exact path="/employerSignup">
+            <EmployerSignUp />
+          </Route>
+          <Route exact path="/companySignup">
+            <CompanySignUp />
           </Route>
           {/* <CandidateRoute path="/">
             <TinderCards user="candidate"/>
