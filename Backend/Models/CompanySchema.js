@@ -48,7 +48,7 @@ var companySchema = new mongoose.Schema(
           },
           pincode: {
             type: Number,
-            required: true,
+            // required: true,
             min: 0, 
             max: 6
           },
