@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import {Formik, Form, Field, ErrorMessage} from 'formik';
 import axios from 'axios';
-
+import jwt_decode from 'jwt-decode';
 
 function Login(props) {
     const [email] = useState('');
@@ -16,9 +16,12 @@ function Login(props) {
         axios.post('http://localhost:8001/login', details)
             .then(response => {
                 if(response.status === 200) {
-                    console.log('response ', response);
+                    console.log('response ', response.data);
                     const token = response.data;
-                    localStorage.setItem('token', token)
+                    localStorage.setItem('token', token);
+                    response.data = jwt_decode(response.data.split(' ')[1]);
+                    localStorage.setItem('userID', response.data.user._id)
+                    console.log('userID from localStorage ', localStorage);
                     axios.defaults.headers.common['Authorization'] = token;
                     if(token.length > 0) {
                         setIsLoggedIn(true);

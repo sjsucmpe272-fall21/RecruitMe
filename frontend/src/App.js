@@ -16,6 +16,7 @@ import SELREJ from './Components/candidate/sel_rej'
 import CandidateSignUp from './Components/Signup/CandidateSignup';
 import EmployerSignUp from './Components/Signup/EmployerSignup';
 import CompanySignUp from './Components/Signup/CompanySignup';
+import CandidateDesiredFilter from './Components/candidate/CandidateDesiredFilter';
 
 function App() {
   return (
@@ -62,6 +63,9 @@ function App() {
           </Route>
           <Route exact path="/companySignup">
             <CompanySignUp />
+          </Route>
+          <Route exact path="/applyFilters">
+            <CandidateDesiredFilter />
           </Route>
           {/* <CandidateRoute path="/">
             <TinderCards user="candidate"/>

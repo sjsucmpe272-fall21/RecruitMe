@@ -12,7 +12,8 @@ const {
 } = require("linkedin-jobs-scraper");
 const request = require('request')
 const express = require("express");
-const app = express()
+const app = express();
+const mongoose = require('mongoose');
 
 exports.apply_job = (req,res) =>
 {
@@ -50,7 +51,7 @@ exports.withdraw_job = (req,res) =>
     })
 }
 
-exports.getCandidateProfile = (req)=> {
+exports.getCandidateProfile = (req, res)=> {
     var candidateId = req.body.candidateId;
 
     return Candidate.find({_id: candidateId})
@@ -268,12 +269,15 @@ exports.getSimilarJobs = async (req,res)=>{
 
 exports.getcandidateprof = async (req,res) =>
 {
-    return Candidate.find({_id: req.body.candidate_id}).exec(function(err, models) {
+    console.log(req.body.candidate_id);
+    console.log(mongoose.Types.ObjectId(req.body.candidate_id));
+    return Candidate.find({_id: mongoose.Types.ObjectId(req.body.candidate_id)}).exec(function(err, models) {
         if (err) {
             res.render('error', {
                 status: 500
             });
         } else {
+            console.log('result ', models);
             res.json(models);
         }
     });
@@ -343,4 +347,34 @@ exports.job_apply = async (req,res) =>
         res.send("error is: "+error);
     }
     
+}
+
+exports.applyFilters = async (req, res) => {
+    console.log('apply filters req.body ', req.body);
+    try {
+        let result = await Candidate.updateOne(
+            {_id: mongoose.Types.ObjectId(req.body.userID)},
+            {
+                desiredSeniorityLevel: req.body.seniorityLevel,
+                desiredJobType: req.body.jobType,
+                skills: req.body.skills
+            }
+        );
+        console.log('update candidate result ', result);
+        res.status(200).end('candidate update successfull');
+        // let isPasswordMatch = await bcrypt.compare(req.body.password, user.encry_password);
+        // if(isPasswordMatch) {
+        //     const payload = { _id: user._id, user: user, userType: req.body.userType};
+        //     const token = jwt.sign(payload, 'recruitme', {expiresIn: 1008000});
+        //     res.status(200).end('Bearer '+ token);
+        // }
+        // else {
+        //     console.log('Password does not match ');
+        //     res.status(401).end('Invalid Credentials');
+        // }
+    }
+    catch(err) {
+        console.log('error ', err);
+        res.status(500).end('Error occured');
+    }
 }

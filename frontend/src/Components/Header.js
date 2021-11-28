@@ -13,6 +13,7 @@ function Header() {
 
     function handleLogout() {
         localStorage.removeItem("token");
+        localStorage.removeItem("userID");
         localStorage.clear();
         axios.post('http://localhost:8001/logout')
             .then((res) => {
@@ -30,11 +31,11 @@ function Header() {
             <IconButton>
                 <PersonIcon className="header__icon" fontSize="large"/>
             </IconButton>
-            
+            <Button variant="outlined" href="/applyFilters">Apply Desired Filters</Button>
             <img className="header__logo" src={TinderLogo} alt="RecruitMe"/>
-            <IconButton>
+            {/* <IconButton>
                 <ForumIcon className="header__icon" fontSize="large"/>
-            </IconButton>
+            </IconButton> */}
             <Button variant="outlined" href="/newJobs">Job Listings</Button>
             <Button variant="outlined" color="error" onClick={handleLogout}>
                 Logout

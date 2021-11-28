@@ -73,7 +73,13 @@ var candidateSchema = new mongoose.Schema(
       skills: [{
         type: Array,
         required: true
-      }]
+      }],
+      desiredSeniorityLevel: {
+        type: String
+      },
+      desiredJobType: {
+        type: String
+      }
     }
 )
 
