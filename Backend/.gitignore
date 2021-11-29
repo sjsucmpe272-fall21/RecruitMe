@@ -1,2 +1,3 @@
 node_modules/
 ElasticSearch/connection.js
+.env
