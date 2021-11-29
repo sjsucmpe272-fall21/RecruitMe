@@ -1,7 +1,7 @@
 const Candidate = require("../Models/CandidateSchema");
 const Job = require("../Models/JobSchema");
 const FormattedJobData = require("../Models/FormattedJobData");
-//  const client = require('../elasticsearch/connection');
+const client = require('../elasticsearch/connection');
 const { 
     LinkedinScraper,
     relevanceFilter,
@@ -103,24 +103,24 @@ exports.getJobs = (req,res)=>{
                 "jobFunction":data.jobFunction,
                 "jobType":data.employmentType,
                 "industries":data.industries,
-                "candidates_applied": []
+                "candidates_applied": ["000000000000000000000000"]
             };
             
-            // await client.index({ 
-            //     index: 'jobs',
-            //     id: data.jobId,
-            //     body: job
-            // })
-            // .then(()=>{
-            //     console.log("Inserted into elastic search successfully");
-            // })
-            // .catch((err)=>{
-            //     console.log("Inserted into elastic search Failed "+err);
-            // })
+            await client.index({ 
+                index: 'jobs',
+                id: data.jobId,
+                body: job
+            })
+            .then(()=>{
+                console.log("Inserted into elastic search successfully");
+            })
+            .catch((err)=>{
+                console.log("Inserted into elastic search Failed "+err);
+            })
 
-            // job._id = data.jobId;
-            // jobs.push(job);
-            // formattedJobs.push(formattedJob);
+            job._id = data.jobId;
+            jobs.push(job);
+            formattedJobs.push(formattedJob);
 
         });
     
@@ -187,12 +187,12 @@ exports.getJobs = (req,res)=>{
                             type: [typeFilter.FULL_TIME, typeFilter.CONTRACT]    
                         },       
                     }                                                    
-                // },
-                // {
-                //     query: "Sales",
-                //     options: {                    
-                //         limit: 2, // This will override global option limit (33)
-                //     }
+                },
+                {
+                    query: "Sales",
+                    options: {                    
+                        limit: 2, // This will override global option limit (33)
+                    }
                 },
             ], { // Global options for this run, will be merged individually with each query options (if any)
                 locations: ["Europe"],
@@ -207,6 +207,8 @@ exports.getJobs = (req,res)=>{
 }
 
 exports.getSuitableJobs = async (req,res)=>{
+    // let skills = req.body.skills;
+    // [{"name":"html"},{"name":"python"}]
     await client.search({
         index: 'jobs',
         body: {
@@ -216,15 +218,15 @@ exports.getSuitableJobs = async (req,res)=>{
                     must_not: [
                         {term: {
                         candidates_applied: {
-                            value: "1234"
+                            value: parseInt(req.body.candidate_id)
                         }
                         }}
-                    ],
-                    should: {
-                        match: {
-                            jobDescription: 'Electronics engineer'
-                        }
-                    }
+                    ]
+                    // should: {
+                    //     match: {
+                    //         jobDescription: 'Electronics engineer'
+                    //     }
+                    // }
                 }
                 
             },
@@ -253,7 +255,10 @@ exports.getSimilarJobs = async (req,res)=>{
           },
           script:{
             lang: "painless",
-            source: "if(ctx._source.candidates_applied.indexOf(1234)==-1)ctx._source.candidates_applied.add(1234)"
+            source: "if(ctx._source.candidates_applied.indexOf(params.id)==-1)ctx._source.candidates_applied.add(params.id)",
+            params : {
+                "id" : req.body.candidate_id
+             }
           }
         }
       })
@@ -286,6 +291,34 @@ exports.job_apply = async (req,res) =>
     try
     {
         let job = await Job.find({_id: req.body.job_id})
+        let candidate_id = parseInt(req.body.candidate_id.substring(0,5))
+        client.updateByQuery({
+            index: "jobs",
+            type: '_doc',  
+            body:{
+                script:{
+                    lang: "painless",
+                    source: "if(!ctx._source.candidates_applied.contains(params['id']))ctx._source.candidates_applied.add(params['id'])",
+                    params : {
+                        id : candidate_id
+                     }
+                  },
+                  query: {
+                    match: {
+                     _id: req.body.job_id,
+                    },
+                  }
+            }
+        })
+        .then(
+            function(resp) {
+                console.log("Successful update! The response was: ", resp);
+            },
+            function(err) {
+                console.trace(err.message);
+            }
+        );
+
         let job_doc = job[0]
         if (!('candidates_applied' in job_doc))
         {
@@ -312,30 +345,6 @@ exports.job_apply = async (req,res) =>
             candidate_doc.jobsAppliedTo.push(req.body.job_id)
             candidate_doc.save()
         }
-
-        
-        client.updateByQuery({
-            index: "jobs",
-            body:{
-            query: {
-                terms: {
-                  _id: [ req.body.job_id ] 
-                }
-              },
-              script:{
-                lang: "painless",
-                source: "if(ctx._source.candidates_applied.indexOf(1234)==-1)ctx._source.candidates_applied.add(1234)"
-              }
-            }
-        })
-        .then(
-            function(resp) {
-                console.log("Successful update! The response was: ", resp);
-            },
-            function(err) {
-                console.trace(err.message);
-            }
-        );
         res.send(candidate)
     }
     catch(error)
