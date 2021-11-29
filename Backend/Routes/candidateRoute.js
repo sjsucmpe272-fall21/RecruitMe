@@ -5,7 +5,7 @@ const { checkAuth } = require("../Utils/auth");
 const{getSimilarJobs,withdraw_job,getCandidateProfile,getJobs,job_apply,apply_job,getSuitableJobs,getcandidateprof} = require("../Controllers/candidateController")
 //const{getSimilarJobs} = require("../Controllers/TFIDF")
 
-router.get("/getSuitableJobs",  getSuitableJobs);
+router.post("/getSuitableJobs",  getSuitableJobs);
 router.post("/getSimilarJobs",  getSimilarJobs);
 router.get("/getJobs",  getJobs);
 router.post("/apply_job", checkAuth, apply_job);

@@ -6,15 +6,16 @@ import { Carousel } from 'react-responsive-carousel';
 import Header from './Header';
 import axios from 'axios';
 import {SelectJob,GetSimilarJobs} from '../Components/api_calls/CandidateApiCalls'
+import {isAuthenticated} from "../authHelper/auth"
 
 function TinderCardsForCandidates() {
     const [allJobs, setAllJobs] = useState([]);
     const [similarJobs, setSimilarJobs] = useState([]);
     const [lastDirection, setLastDirection] = useState()
-
+    const {user}  = isAuthenticated();
     useEffect(() => {
         // axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
-        axios.get('http://localhost:8001/api/getSuitableJobs')
+        axios.post('http://localhost:8001/api/getSuitableJobs',{"candidate_id":user._id})
             .then(response => {
                 console.log(response.data.body.hits.hits);
                 setAllJobs(response.data.body.hits.hits);
@@ -27,16 +28,16 @@ function TinderCardsForCandidates() {
     const swiped = (direction, id) => {
         if(direction=="right")
         {
-             SelectJob({"job_id":id, "candidate_id":"619ef6b4904142342a65a662"});
-             GetSimilarJobs({"job_id":id})
-             .then(response=>{
-                console.log(response.data.body.hits.hits);
-                setSimilarJobs(response.data.body.hits.hits);
-                setAllJobs([...similarJobs]);
-             })
-             .catch(err => {
-                console.log('error ', err);
-            })
+             SelectJob({"job_id":id, "candidate_id":user._id});
+            //  GetSimilarJobs({"job_id":id})
+            //  .then(response=>{
+            //     console.log(response.data.body.hits.hits);
+            //     setSimilarJobs(response.data.body.hits.hits);
+            //     setAllJobs([...similarJobs]);
+            //  })
+            //  .catch(err => {
+            //     console.log('error ', err);
+            // })
         }
         setLastDirection(direction);
       }
