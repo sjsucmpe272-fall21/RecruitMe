@@ -32,7 +32,7 @@ function Header() {
                 <PersonIcon className="header__icon" fontSize="large"/>
             </IconButton>
             <Button variant="outlined" href="/applyFilters">Apply Desired Filters</Button>
-            <img className="header__logo" src={TinderLogo} alt="RecruitMe"/>
+            <a href='/'><img className="header__logo" src={TinderLogo} alt="RecruitMe"/></a>
             {/* <IconButton>
                 <ForumIcon className="header__icon" fontSize="large"/>
             </IconButton> */}
