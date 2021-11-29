@@ -17,6 +17,7 @@ import CandidateSignUp from './Components/Signup/CandidateSignup';
 import EmployerSignUp from './Components/Signup/EmployerSignup';
 import CompanySignUp from './Components/Signup/CompanySignup';
 import CandidateDesiredFilter from './Components/candidate/CandidateDesiredFilter';
+import { Form, Formik } from 'formik';
 
 function App() {
   return (
@@ -27,7 +28,9 @@ function App() {
             <Login />
           </Route>
           <Route exact path="/login">
-            <Login />
+            <Form>
+              <Login />
+            </Form>
           </Route>
           <Route exact path="/chat">
           </Route>
