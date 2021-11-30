@@ -3,8 +3,8 @@ export const isAuthenticated = () =>{
     {
         return false
     }   
-    if(localStorage.getItem("jwt")){
-        return JSON.parse(localStorage.getItem("jwt"))
+    if(localStorage.getItem("userID")){
+        return JSON.parse(localStorage.getItem("userID"))
     }
     else{
         return false;

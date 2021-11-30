@@ -208,26 +208,29 @@ exports.getJobs = (req,res)=>{
 }
 
 exports.getSuitableJobs = async (req,res)=>{
-    // let skills = req.body.skills;
+    //let skills = req.body.skills;
     // [{"name":"html"},{"name":"python"}]
+     let skills = req.body.skills.map((a)=>`${a.name}`).join(' ');
+    //const skills = req.body.skills;
+
     await client.search({
         index: 'jobs',
         body: {
             query: {
                 
                 bool: {
-                    must_not: [
-                        {term: {
-                        candidates_applied: {
-                            value: parseInt(req.body.candidate_id)
-                        }
-                        }}
-                    ]
-                    // should: {
-                    //     match: {
-                    //         jobDescription: 'Electronics engineer'
+                    // must_not: [
+                    //     {term: {
+                    //     candidates_applied: {
+                    //         value: parseInt(req.body.candidate_id)
                     //     }
-                    // }
+                    //     }}
+                    // ],
+                    should: {
+                        match: {
+                            jobDescription: skills
+                        }
+                    }
                 }
                 
             },

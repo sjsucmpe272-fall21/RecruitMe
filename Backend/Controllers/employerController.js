@@ -134,3 +134,34 @@ exports.get_selected_candidates = async (req,res) =>
     }
     res.send(sel_can)
 }
+
+exports.getCandidates = (req,res)=>{
+    var jobId = req.body.jobId;
+    // var candidates_applied = Job.find({_id:jobId})
+    // .select("candidates_applied")
+    // .exec()
+    // .then((result)=>res.json(result))
+    // .catch((err)=>console.log(err))
+
+    var candidates_applied = Job.find()
+    .select("candidates_applied")
+    .exec()
+    .then((result)=>res.json(result))
+    .catch((err)=>console.log(err))
+    return Candidate.find({
+        '_id' : {
+            $in: candidates_applied
+        }
+    })
+}
+
+
+// xports.getCandidates = (req,res)=>{
+//     var jobId = req.body.jobId;
+
+//     returnJob.find()
+//     .exec()
+//     .then((result)=>res.json(result))
+//     .catch((err)=>console.log(err))
+  
+// }

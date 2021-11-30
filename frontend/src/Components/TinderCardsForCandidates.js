@@ -8,14 +8,27 @@ import axios from 'axios';
 import {SelectJob,GetSimilarJobs} from '../Components/api_calls/CandidateApiCalls'
 import {isAuthenticated} from "../authHelper/auth"
 
-function TinderCardsForCandidates() {
+function TinderCardsForCandidates(props) {
     const [allJobs, setAllJobs] = useState([]);
     const [similarJobs, setSimilarJobs] = useState([]);
     const [lastDirection, setLastDirection] = useState()
-    const {user}  = isAuthenticated();
-    useEffect(() => {
+    const userID  = localStorage.getItem("userID") ? localStorage.getItem("userID") : null;
+    const [skills, setSkills] = useState([]);
+    console.log("User id is "+userID);
+    useEffect(async() => {
         // axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
-        axios.post('http://localhost:8001/api/getSuitableJobs',{"candidate_id":user._id})
+        // await axios.post('http://localhost:8001/api/candidate/prof', {candidate_id: userID})
+        // .then(response => {
+        //     console.log(response.data);
+        //     const skills = response.data[0].skills.map(((a)=>`${a.name}`).join(' '));
+        //     console.log('skills ', skills);
+        //     setSkills(skills);
+        // })
+        // .catch(err => {
+        //     console.log('error ', err);
+        // })
+
+        axios.post('http://localhost:8001/api/getSuitableJobs',{"candidate_id":userID, "skills":props.skills})
             .then(response => {
                 console.log(response.data.body.hits.hits);
                 setAllJobs(response.data.body.hits.hits);
@@ -28,7 +41,7 @@ function TinderCardsForCandidates() {
     const swiped = (direction, id) => {
         if(direction=="right")
         {
-             SelectJob({"job_id":id, "candidate_id":user._id});
+             SelectJob({"job_id":id, "candidate_id":userID});
             //  GetSimilarJobs({"job_id":id})
             //  .then(response=>{
             //     console.log(response.data.body.hits.hits);

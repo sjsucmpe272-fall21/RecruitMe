@@ -82,7 +82,9 @@ function Login(props) {
 
     return (
         <div className="container vw-100 vh-100">
-            {localStorage.getItem('token') ? <Redirect to='/home' /> : null}
+            {localStorage.getItem('token') && userType=="Employer" && <Redirect to='/recruiter' />}
+            {localStorage.getItem('token') && userType=="Candidate" && <Redirect to='/applyFilters' />}
+            {/* {localStorage.getItem('token') && userType=="Candidate" ?<Redirect to='/home' /> : localStorage.getItem('token') && userType=="Employer" ? } */}
             <div className="row my-5 align-items-center justify-content-center">
                 <div className="col-4">
                     {loginMessage}
