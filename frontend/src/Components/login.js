@@ -32,7 +32,7 @@ function Login(props) {
                     const token = response.data;
                     localStorage.setItem('token', token);
                     response.data = jwt_decode(response.data.split(' ')[1]);
-                    localStorage.setItem('userID', response.data.user._id)
+                    localStorage.setItem('userID', response.data.user._id);
                     console.log('userID from localStorage ', localStorage);
                     localStorage.removeItem('otp');
                     axios.defaults.headers.common['Authorization'] = token;
@@ -70,7 +70,7 @@ function Login(props) {
                 if(response.status === 200) {
                     console.log('response ', response.data);
                     console.log('success: otp mailed');
-                    localStorage.setItem('otp', JSON.parse(response.data));
+                    localStorage.setItem('otp', response.data);
                 }
                 else
                     console.log('Could not mail otp ', response.status);
