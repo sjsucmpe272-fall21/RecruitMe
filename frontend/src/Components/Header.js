@@ -26,6 +26,7 @@ function Header() {
     function handleLogout() {
         localStorage.removeItem("token");
         localStorage.removeItem("userID");
+        localStorage.removeItem("userType");
         localStorage.clear();
         axios.post('http://localhost:8001/logout')
             .then((res) => {
@@ -69,7 +70,7 @@ function Header() {
         },
     }};
 
-    // const userType
+    const userType = localStorage.getItem('userType');
 
     return (
         <ThemeProvider theme={createTheme(themeOptions)}>
@@ -115,11 +116,14 @@ function Header() {
                         display: { xs: 'block', md: 'none' },
                     }}
                     >
-                    {pages.map((page) => (
-                        <MenuItem key={page.text} onClick={handleCloseNavMenu}>
-                        <Typography textAlign="center">{page.text}</Typography>
+                    {/* {pages.map((page) => ( */}
+                        <MenuItem key='Job Listings' onClick={handleCloseNavMenu}>
+                            <Typography textAlign="center">Job Listings</Typography>
                         </MenuItem>
-                    ))}
+                        <MenuItem key='Apply Desired Filters' onClick={handleCloseNavMenu}>
+                            <Typography textAlign="center">Apply Desired Filters</Typography>
+                        </MenuItem>
+                    {/* ))} */}
                     </Menu>
                 </Box>
                 <Typography
@@ -131,16 +135,28 @@ function Header() {
                     LOGO
                 </Typography>
                 <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                    {pages.map((page) => (
-                    <Button
-                        key={page.text}
-                        onClick={handleCloseNavMenu}
-                        sx={{ my: 2, color: 'red', display: 'block' }}
-                        href={page.link}
-                    >
-                        {page.text}
-                    </Button>
-                    ))}
+                    {/* {pages.map((page) => ( */}
+                    {userType === 'Candidate' && 
+                        <Button
+                            key='Job Listings'
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'red', display: 'block' }}
+                            href='/newJobs'
+                        >
+                            Job Listings
+                        </Button>
+                    }
+                    {userType === 'Candidate' && 
+                        <Button
+                            key='Apply Desired Filters'
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'red', display: 'block' }}
+                            href='/applyFilters'
+                        >
+                            Apply Desired Filters
+                        </Button>
+                    }
+                    {/* ))} */}
                 </Box>
 
                 <Box sx={{ flexGrow: 0 }}>

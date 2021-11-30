@@ -34,6 +34,7 @@ function Login(props) {
                     response.data = jwt_decode(response.data.split(' ')[1]);
                     localStorage.setItem('userID', response.data.user._id);
                     console.log('userID from localStorage ', localStorage);
+                    localStorage.setItem('userType', details.userType);
                     localStorage.removeItem('otp');
                     axios.defaults.headers.common['Authorization'] = token;
                     if(token.length > 0) {
