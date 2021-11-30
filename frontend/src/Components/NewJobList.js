@@ -28,11 +28,11 @@ export default function NewJoblist() {
   return (
     <>
     <Header />
-    <Typography gutterBottom variant="h4" component="div">
+    {/* <Typography gutterBottom variant="h4" component="div">
         Job Listings
-    </Typography>
+    </Typography> */}
     <Container>
-        <Stack spacing={2} mx={10}>
+        <Stack spacing={2} mx={10} my={5}>
             {allJobs.map(job => {
                 return (
                     <NewJob key={job._id} {...job} />

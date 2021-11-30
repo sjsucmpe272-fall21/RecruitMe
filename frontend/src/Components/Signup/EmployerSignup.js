@@ -129,6 +129,9 @@ class EmployerSignUp extends React.Component {
                                     if(values.contactno.length < 10 || values.contactno.length > 10) {
                                         errors.contactno = 'Contact must be exactly 10 digits';
                                     }
+                                    if(values.company === 'defaultVal') {
+                                        errors.company = 'Select a company!';
+                                    }
                                     return errors;
                                 }}
 
@@ -168,12 +171,15 @@ class EmployerSignUp extends React.Component {
                                             id="company" 
                                             name="company" 
                                             className="form-select"
-                                            onChange={handleChange}    
+                                            onChange={handleChange}
+                                            required   
                                         >
+                                            <option defaultValue key="defaultVal" value="defaultVal">--select company--</option>
                                             {this.state.companyList.map(company => {
                                                 return <option key={company._id} value={company._id}>{company.name}</option>
                                             })}
                                         </select>
+                                        <ErrorMessage name="company" component="div" />
                                     </div>
                                     <div  className="mb-3">
                                         <label htmlFor="contactno">Contact No. *</label>
