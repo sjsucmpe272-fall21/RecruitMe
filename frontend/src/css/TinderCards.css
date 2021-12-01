@@ -3,13 +3,16 @@
     width: 600px;
     padding: 20px;
     max-width: 85vh;
-    height: 60vh;
+    height: 75vh;
+    
     border-radius: 20px;
     background-size: cover;
     background-position: center;
     box-shadow: opx 18px 53px 0px rgba(0,0,0,0.3);
 }
-
+.format_card{
+    overflow: scroll;
+}
 .card__image{
     height: 100%;
 }
@@ -21,6 +24,7 @@
     display: flex;
     justify-content: center;
     margin-top: 5vh;
+    height: 100%;
 }
 
 .swipe{

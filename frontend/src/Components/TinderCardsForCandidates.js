@@ -64,10 +64,10 @@ function TinderCardsForCandidates(props) {
                     return <TinderCard className="swipe" key={job._id} onSwipe={(dir) => swiped(dir, job._id)}
                     preventSwipe={['up', 'down']}>
                         <div
-                            className="card">
+                            className="format_card card">
                             <h1>{job._source.company}</h1>
                             <p>{job._source.industries}</p>
-                            <p>{job._source.jobDescription.substring(0,720)}</p>
+                            <p>{job._source.jobDescription}</p>
                             <a href={job._source.applyLink}>Apply Link</a>
                             <h1>{job._source.jobLocation}</h1>
                         </div>

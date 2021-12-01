@@ -22,8 +22,7 @@ var employerSchema = new mongoose.Schema(
         unique: true
       },
       company: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Company'
+        type: String
       },
       encry_password: {
         type: String,

@@ -104,7 +104,7 @@ exports.getJobs = (req,res)=>{
                 "jobFunction":data.jobFunction,
                 "jobType":data.employmentType,
                 "industries":data.industries,
-                "candidates_applied": ["000000000000000000000000"]
+                "candidates_applied": []
             };
             
             await client.index({ 
@@ -212,25 +212,24 @@ exports.getSuitableJobs = async (req,res)=>{
     // [{"name":"html"},{"name":"python"}]
      let skills = req.body.skills.map((a)=>`${a.name}`).join(' ');
     //const skills = req.body.skills;
-
     await client.search({
         index: 'jobs',
         body: {
             query: {
-                fuzzy: {
-                    jobDescription: {
-                        value: skills
-                    //   fuzziness: "AUTO",
-                    //   max_expansions: 50,
-                    //   prefix_length: 10,
-                    //   transpositions: true
-                    }
-                  }
-                // match: {
+                // fuzzy: {
                 //     jobDescription: {
                 //         value: skills
+                //       fuzziness: "AUTO",
+                //       max_expansions: 50,
+                //       prefix_length: 10,
+                //       transpositions: true
                 //     }
-                // }
+                //   }
+                match: {
+                    jobDescription: {
+                        query: skills
+                    }
+                }
                 // bool: {
                 //     // must_not: [
                 //     //     {term: {
