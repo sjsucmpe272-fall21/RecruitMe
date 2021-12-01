@@ -53,7 +53,7 @@ exports.signup = async (req, res, done) => {
             result = new Company({
                 email: req.body.email,
                 name: req.body.name,
-                password: hashedPassword,
+                encry_password: hashedPassword,
                 phone: Number(req.body.contactno),
                 description: req.body.description,
                 industries: req.body.industries,
