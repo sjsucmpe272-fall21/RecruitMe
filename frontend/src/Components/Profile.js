@@ -14,7 +14,7 @@ export default function Profile() {
         const userID = localStorage.getItem('userID');
         console.log('userID ', userID);
         if(userType === 'Candidate') {
-            axios.post('http://localhost:8001/api/candidate/prof', {candidate_id: userID})
+            axios.post('/api/candidate/prof', {candidate_id: userID})
             .then(response => {
                 console.log(response.data);
                 const skills = response.data[0].skills.map(skillArray => skillArray[0]);
@@ -26,7 +26,7 @@ export default function Profile() {
             })
         }
         else if(userType === 'Employer') {
-            axios.post('http://localhost:8001/api/employer', {employerId: userID})
+            axios.post('/api/employer', {employerId: userID})
             .then(response => {
                 console.log(response.data);
                 setUser(response.data[0]);
@@ -36,7 +36,7 @@ export default function Profile() {
             })
         }
         else if(userType === 'Company') {
-            axios.post('http://localhost:8001/companyProfile', {companyID: userID})
+            axios.post('/companyProfile', {companyID: userID})
             .then(response => {
                 console.log(response.data);
                 setUser(response.data[0]);

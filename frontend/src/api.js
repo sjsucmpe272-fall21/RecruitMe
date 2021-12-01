@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:8001";
+const BASE_URL = "http://3.16.108.26:8001";
 
 // CANDIDATE
 export const GETALLJOBS = `${BASE_URL}/jobs`;

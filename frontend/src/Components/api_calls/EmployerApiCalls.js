@@ -1,6 +1,6 @@
 export const SelectCandidate = appliedJob => {
     console.log(process.env.REACT_APP_BACKEND);
-    return fetch(`http://localhost:8001/api/select_candidate`, {
+    return fetch(`/api/select_candidate`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -16,7 +16,7 @@ export const SelectCandidate = appliedJob => {
 
   // export const getCandidates = job => {
   //   console.log(process.env.REACT_APP_BACKEND);
-  //   return fetch(`http://localhost:8001/api/getCandidates`, {
+  //   return fetch(`/api/getCandidates`, {
   //     method: "POST",
   //     headers: {
   //       Accept: "application/json",
@@ -31,7 +31,7 @@ export const SelectCandidate = appliedJob => {
   // };
   export const getCandidates = () => {
     console.log(process.env.REACT_APP_BACKEND);
-    return fetch(`http://localhost:8001/api/getCandidates`, {
+    return fetch(`/api/getCandidates`, {
       method: "POST",
       headers: {
         Accept: "application/json",

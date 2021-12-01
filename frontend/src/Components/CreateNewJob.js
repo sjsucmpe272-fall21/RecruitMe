@@ -19,7 +19,7 @@ export default function CreateNewJob() {
     const handleSubmit = () => {
         console.log('in handlesubmit');
         const userName = localStorage.getItem('userName');
-        axios.post('http://localhost:8001/api/createNewJob', {...jobDetails})
+        axios.post('/api/createNewJob', {...jobDetails})
             .then(response => {
                 window.location = "/recruiter"
                 // console.log(response.data);
