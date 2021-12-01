@@ -92,7 +92,7 @@ function TinderCards() {
                     mydata.push(can)
                 }
             }
-
+            setPeople(mydata)
             console.log('applied_candidates: ',mydata)
         }
         getjobs()
@@ -109,14 +109,14 @@ function TinderCards() {
         //         console.log('error ', err);
         //     })
 
-            getCandidates()
-            .then(response => {
-                console.log(response.data.body.hits.hits);
-                setPeople(response.data.body.hits.hits);
-            })
-            .catch(err => {
-                console.log('error ', err);
-            })
+            // getCandidates()
+            // .then(response => {
+            //     console.log(response.data.body.hits.hits);
+            //     setPeople(response.data.body.hits.hits);
+            // })
+            // .catch(err => {
+            //     console.log('error ', err);
+            // })
     }, [])
 
     const [lastDirection, setLastDirection] = useState()
@@ -137,17 +137,27 @@ function TinderCards() {
                 {people.map((person) => {
                     return <TinderCard className="swipe" key={person.name} onSwipe={(dir) => swiped(dir, person._id)}
                     preventSwipe={['up', 'down']}>
+                        
                         <div
                             className="card">
-                            <Carousel showThumbs={false} infiniteLoop={true} showStatus={false}>
+                                <h1>{person.firstName}</h1>
+                                <p>Contact Number: {person.phoneNumber}</p>
+                                <h2>Skills</h2>
+                                <ul>
+                                {person.skills.length>0 && person.skills[0].map((skill)=>{
+                                       return (<li>{skill.name}</li>)
+                                })}
+                                </ul>
+                                
+                            {/* <Carousel showThumbs={false} infiniteLoop={true} showStatus={false}>
                                 {person.url.length > 0 && person.url.map((image) => {
                                     return <div className="card">
                                         <img className="card__image" src={image} alt="profile" />
                                     </div>
                                 })}
                                 <GithubDetails githubUserName={person.githubUserName}/>
-                            </Carousel>
-                            <h3>{person.name}</h3>
+                            </Carousel> */}
+                            <h3>{person.firstName}</h3>
                         </div>
                     </TinderCard>
                 })}
