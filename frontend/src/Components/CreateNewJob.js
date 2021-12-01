@@ -5,7 +5,7 @@ import Header from "./Header";
 import axios from 'axios';
 
 export default function CreateNewJob() {
-    const [jobDetails, setJobDetails] = useState({});
+    const [jobDetails, setJobDetails] = useState({jobID: ''});
     const userType = localStorage.getItem('userType');
 
     const setValues = (e) => {
@@ -43,10 +43,23 @@ export default function CreateNewJob() {
                     <TextField
                         InputLabelProps={{ shrink: true }}
                         id="outlined-required"
+                        label="Job ID"
+                        value={jobDetails.jobID}
+                        onChange={(e) => setValues(e)}
+                        variant="outlined"
+                        error={jobDetails.jobID.length < 24 || jobDetails.jobID.length > 24}
+                        helperText="Job ID must be exactly 24 characters long"
+                        name="jobID"
+                        required
+                    />
+                    <TextField
+                        InputLabelProps={{ shrink: true }}
+                        id="outlined-required"
                         label="Job Name"
                         value={jobDetails.jobName}
                         onChange={(e) => setValues(e)}
                         variant="outlined"
+                        required
                         name="jobName"
                     />
                     <TextField
@@ -55,6 +68,7 @@ export default function CreateNewJob() {
                         label="Company"
                         value={jobDetails.company}
                         variant="outlined"
+                        required
                         name="company"
                         onChange={(e) => setValues(e)}
                     />
@@ -64,6 +78,7 @@ export default function CreateNewJob() {
                         label="Industries"
                         value={jobDetails.industries}
                         variant="outlined"
+                        required
                         name="industries"
                         onChange={(e) => setValues(e)}
                     />
@@ -73,6 +88,7 @@ export default function CreateNewJob() {
                         label="Job Type"
                         value={jobDetails.type}
                         variant="outlined"
+                        required
                         name="type"
                         onChange={(e) => setValues(e)}
                     />
@@ -82,6 +98,7 @@ export default function CreateNewJob() {
                         label="Description"
                         value={jobDetails.description}
                         variant="outlined"
+                        required
                         name="description"
                         onChange={(e) => setValues(e)}
                     />
@@ -91,6 +108,7 @@ export default function CreateNewJob() {
                         label="Seniority Level"
                         value={jobDetails.seniorityLevel}
                         variant="outlined"
+                        required
                         name="seniorityLevel"
                         onChange={(e) => setValues(e)}
                     />
@@ -100,6 +118,7 @@ export default function CreateNewJob() {
                         label="Date Posted"
                         value={jobDetails.datePosted}
                         variant="outlined"
+                        required
                         name="datePosted"
                         type="date"
                         onChange={(e) => setValues(e)}
@@ -110,6 +129,7 @@ export default function CreateNewJob() {
                         label="Location"
                         value={jobDetails.location}
                         variant="outlined"
+                        required
                         name="location"
                         onChange={(e) => setValues(e)}
                     />
@@ -119,6 +139,7 @@ export default function CreateNewJob() {
                         label="Apply Link"
                         value={jobDetails.applyLink}
                         variant="outlined"
+                        required
                         name="applyLink"
                         onChange={(e) => setValues(e)}
                     />
