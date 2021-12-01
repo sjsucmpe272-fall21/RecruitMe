@@ -52,7 +52,8 @@ exports.signup = async (req, res, done) => {
                 state: req.body.state,
                 country: req.body.country,
                 skills: req.body.skills,
-                githubId: req.body.githubId
+                githubId: req.body.githubId,
+                resumeName: req.body.resumeName
             });
         }
         else if(req.body.user === 'company') {

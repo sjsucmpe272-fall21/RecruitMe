@@ -82,6 +82,9 @@ var candidateSchema = new mongoose.Schema(
       },
       githubId: {
         type: String
+      },
+      resumeName: {
+        type: String
       }
     }
 )

@@ -20,7 +20,8 @@ class CandidateSignUp extends React.Component {
             clearable: false,
             searchBy: "name",
             addPlaceholder: "+ click to add",
-            selectValues: []
+            selectValues: [],
+            resumeName: ''
         }
     }
 
@@ -39,20 +40,16 @@ class CandidateSignUp extends React.Component {
             .then(response => {
                 if (response.status === 200) {
                     console.log('Image name : ', imageFile.name);
-                    // this.setState({
-                    //     profileDetails: {
-                    //         ...this.state.profileDetails,
-                    //         imageName: imageFile.name
-                            // imageLink: '/items/download-image/' + imageFile.name
-                    //     }
-                    // })
-                    // console.log('candidate pic name state ', this.state.profileDetails.imageName);
+                    this.setState({
+                        resumeName: imageFile.name
+                    })
                 }
             })
     }
 
     handleSignUp = (details) => {
         console.log('inside handleSignUp react');
+        details.resumeName = this.state.resumeName;
         console.log(details);
         // axios.defaults.withCredentials = true;
         axios.post('http://localhost:8001/signup', details)

@@ -171,27 +171,21 @@ export default function Profile() {
         </Grid>
         <Grid container maxHeight={'35rem'} style={{'overflow': 'scroll'}} spacing={2} justifyContent={'space-around'} textAlign={'center'}>
             <Grid item xs={12} md={8}>
-                {userType === 'Candidate' && <ViewFile /> }
+                {(userType === 'Candidate' && user.resumeName) && <ViewFile resumeName={user.resumeName} /> }
             </Grid>
         </Grid>
         </>
     )
 }
 
+function ViewFile(props) {
 
-class ViewFile extends Component {
-    render() {
-      return (
-          <Paper elevation={3}>
+    return (
+        <Paper elevation={3}>
                 <FileViewer
                     fileType={'pdf'}
-                    filePath={'https://recruit-me.s3.us-west-1.amazonaws.com/Fall+2021+cmpe+272+green+sheet.pdf'}
+                    filePath={`https://recruit-me.s3.us-west-1.amazonaws.com/`+props.resumeName}
                 />
-          </Paper>
-      );
-    }
-  
-    onError(e) {
-      console.log(e, 'error in file-viewer');
-    }
-  }
+        </Paper>
+    );
+}
