@@ -124,6 +124,7 @@ function Header() {
                         <MenuItem key='Apply Desired Filters' onClick={handleCloseNavMenu}>
                             <Typography textAlign="center">Apply Desired Filters</Typography>
                         </MenuItem>
+
                     {/* ))} */}
                     </Menu>
                 </Box>
@@ -155,6 +156,17 @@ function Header() {
                             href='/applyFilters'
                         >
                             Apply Desired Filters
+                        </Button>
+                    }
+
+                    {userType === 'Candidate' && 
+                        <Button
+                            key='Dashboard'
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'red', display: 'block' }}
+                            href='/candidate_dashboard'
+                        >
+                            Dashboard
                         </Button>
                     }
                     {/* ))} */}

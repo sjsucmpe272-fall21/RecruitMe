@@ -21,3 +21,8 @@
     border: 2px solid black;
     white-space: pre-line;
 }
+
+.btn
+{
+    border-radius: 60px;
+}

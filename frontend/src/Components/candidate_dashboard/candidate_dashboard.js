@@ -8,6 +8,7 @@ import { jobs_list_columns, jobs_list_data } from "./candidate_data";
 import CandidateHeader from "./candidate_header"
 import { GETALLJOBS, GETCANDIDATEPROFILE, JOBDETAILS } from "../../api";
 import "../../css/candidate_dashboard.css"
+import Header from '../Header';
 
 const Dashboard = () => {
   const userID  = localStorage.getItem("userID") ? localStorage.getItem("userID") : null;
@@ -116,7 +117,7 @@ const Dashboard = () => {
 
   return (
     <>
-    <CandidateHeader />
+    <Header />
       <div className="container">
         <div className="row">
           <div className="col-12">
