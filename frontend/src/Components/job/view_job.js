@@ -25,6 +25,7 @@ const ViewJob = () => {
             const job_id = queryParams.get('job_id')
 
             let job_details_response = await axios.post(JOBDETAILS,{'job_id':job_id})
+            console.log(job_details_response)
             if(job_details_response.data.length != 0)
             {
                 let job_details = job_details_response.data[0]

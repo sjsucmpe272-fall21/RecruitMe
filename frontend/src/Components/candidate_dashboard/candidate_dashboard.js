@@ -10,6 +10,9 @@ import { GETALLJOBS, GETCANDIDATEPROFILE, JOBDETAILS } from "../../api";
 import "../../css/candidate_dashboard.css"
 
 const Dashboard = () => {
+  const userID  = localStorage.getItem("userID") ? localStorage.getItem("userID") : null;
+  console.log("userID: ",userID)
+
   const [isLoading_jobs_list, setLoading_jobs_list] = useState(true);
   const [isLoading_applied_jobs, setLoading_Applied_jobs] = useState(true);
   const [isLoading_offers, setLoading_Offers] = useState(true);
@@ -43,7 +46,7 @@ const Dashboard = () => {
       setLoading_jobs_list(false);
     });
 
-    const payload = {'candidate_id':'619ef6b4904142342a65a662'}
+    const payload = {'candidate_id':userID}
 
 
 

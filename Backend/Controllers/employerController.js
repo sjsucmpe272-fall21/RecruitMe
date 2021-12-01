@@ -69,6 +69,22 @@ exports.get_company = async (req,res) =>
     });
 }
 
+exports.get_company_fromid = async (req,res) =>
+{
+    return Employer.find({_id: req.body.userID}).exec(function(err, result) {
+        if (err) 
+        {
+            res.render('error', {
+                status: 500
+            });
+        } 
+        else 
+        {
+            res.json(result)
+        }
+    });
+}
+
 exports.get_jobs = async (req,res) =>
 {
     return Job.find({company: req.body.company}).exec(function(err, result) {
@@ -98,7 +114,7 @@ exports.get_applied_candidates = async (req,res) =>
             {
                 let candidate_id = candidates[i]
                 let candidate = await Candidate.find({_id:candidate_id})
-                app_can[job_id].push(candidate[0])
+                app_can[job_id].push(candidate[0])  
             }
             catch
             {
