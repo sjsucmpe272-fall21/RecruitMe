@@ -124,6 +124,7 @@ function Header() {
                         <MenuItem key='Apply Desired Filters' onClick={handleCloseNavMenu}>
                             <Typography textAlign="center">Apply Desired Filters</Typography>
                         </MenuItem>
+
                     {/* ))} */}
                     </Menu>
                 </Box>
@@ -155,6 +156,39 @@ function Header() {
                             href='/applyFilters'
                         >
                             Apply Desired Filters
+                        </Button>
+                    }
+
+                    {userType === 'Candidate' && 
+                        <Button
+                            key='Dashboard'
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'red', display: 'block' }}
+                            href='/candidate_dashboard'
+                        >
+                            Dashboard
+                        </Button>
+                    }
+                            
+                    {userType === 'Employer' && 
+                        <Button
+                            key='Create New Job'
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'red', display: 'block' }}
+                            href='/createNewJob'
+                        >
+                            Create New Job
+                        </Button>
+                    }
+
+                    {userType === 'Employer' && 
+                        <Button
+                            key='Dashboard'
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'red', display: 'block' }}
+                            href='/recruiter_dashboard'
+                        >
+                            Dashboard
                         </Button>
                     }
                     {/* ))} */}

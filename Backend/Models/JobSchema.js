@@ -61,12 +61,12 @@ var jobSchema = new mongoose.Schema(
     },
     candidates_applied: [{
           type: String,
-          required: true,
+          // required: true,
           maxlength: 100
       }],
     candidates_selected: [{
           type: String,
-          required: true,
+          // required: true,
           maxlength: 100
       }],
       employer : {

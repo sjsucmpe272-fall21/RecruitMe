@@ -35,10 +35,15 @@ exports.signup = async (req, res, done) => {
             });
         }
         else if(req.body.user === 'candidate') {
+            let fName = req.body.name.split(' ')[0];
+            let lName = req.body.name.split(' ')[1];
+            if(req.body.name.includes(' ') === false) {
+                lName = '  ';
+            }
             result = new Candidate({
                 email: req.body.email,
-                firstName: req.body.name.split(' ')[0],
-                lastName: req.body.name.split(' ')[1],
+                firstName: fName,
+                lastName: lName,
                 company: req.body.company,
                 encry_password: hashedPassword,
                 phoneNumber: req.body.contactno,
@@ -46,7 +51,8 @@ exports.signup = async (req, res, done) => {
                 city: req.body.city,
                 state: req.body.state,
                 country: req.body.country,
-                skills: req.body.skills
+                skills: req.body.skills,
+                githubId: req.body.githubId
             });
         }
         else if(req.body.user === 'company') {

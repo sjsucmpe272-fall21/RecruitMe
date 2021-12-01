@@ -7,7 +7,13 @@ import Header from './Header';
 import {SelectCandidate} from "./api_calls/EmployerApiCalls"
 import GithubDetails from './GithubDetails';
 import {getCandidates} from "./api_calls/EmployerApiCalls"
+
+import axios from "axios";
+import { GETCOMPFROMID, GETJOBS, APP_CAN } from "../api";
+
 function TinderCards() {
+    const userID  = localStorage.getItem("userID") ? localStorage.getItem("userID") : null;
+
     const [people, setPeople] = useState([]);
 
     //     {
@@ -24,6 +30,64 @@ function TinderCards() {
     //     }
     // ]);
     useEffect(() => {
+
+        // List Jobs
+        const getjobs = async () =>
+        {
+            // get employer's company
+            let company_response = await axios.post(GETCOMPFROMID,{'userID': userID})
+            let company = company_response.data[0].company
+            // console.log('company: ',company)
+
+            // get all jobs for this company
+            let jobs_response = await axios.post(GETJOBS,{'company':company})
+            let jobs = jobs_response.data
+            // console.log("jobs: ",jobs)      
+
+            let job_det = {}
+            // get applied and selected candidate's names
+            let applied_candidates = {}
+            for (let i=0; i<jobs.length; i++)
+            {
+                let jobid = jobs[i]._id
+                applied_candidates[jobid] = jobs[i].candidates_applied
+                job_det[jobid] = jobs[i]
+            }
+
+            let selected_candidates = {}
+            for (let i=0; i<jobs.length; i++)
+            {
+                let jobid = jobs[i]._id
+                selected_candidates[jobid] = jobs[i].candidates_selected
+                job_det[jobid] = jobs[i]
+            }
+            // console.log(selected_candidates)
+
+            // Data for applied candidates
+            let app_can_response = await axios.post(APP_CAN,applied_candidates)
+            let app_can = app_can_response.data
+
+            let app_can_data = []
+            for (let jid in app_can)
+            {
+                    for (let i=0; i<app_can[jid].length; i++)
+                    {
+                        let temp = {}
+                        temp.job_id = jid
+                        temp.job_title = job_det[jid].name
+                        temp.candidate_id = app_can[jid][i]._id
+                        temp.candidate_name = app_can[jid][i].firstName + ' ' + app_can[jid][i].lastName
+                        temp.phone = app_can[jid][i].phoneNumber
+                        app_can_data.push(temp)
+                    }
+            }
+
+            console.log('applied_candidates: ',app_can)
+        }
+        getjobs()
+
+
+
         // axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
         // getCandidates({"jobId":"1234"})
         //     .then(response => {

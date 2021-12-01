@@ -97,7 +97,7 @@ class CandidateSignUp extends React.Component {
             <div className="container my-5" style={{maxWidth: '35rem'}}>
                 <div className="row vh-40 align-items-center justify-content-center">
                 {signupMessage}
-                    <div className="col card border-danger" style={{height: '63rem'}}>
+                    <div className="col card border-danger" style={{height: '65rem'}}>
                         <div className="card-body">
                             <h5 className="card-title">Candidate Signup</h5>
                             <Formik
@@ -217,6 +217,10 @@ class CandidateSignUp extends React.Component {
                                             labelField='name'
                                             valueField='name'
                                         />
+                                    </div>
+                                    <div  className="">
+                                        <label htmlFor="githubId">GitHub ID *</label>
+                                        <Field type="text" name="githubId" className="form-control" id="githubId" placeholder="GitHub ID" required />
                                     </div>
                                     <div className="">
                                         <label htmlFor="" className="col-form-label">Upload Resume</label>

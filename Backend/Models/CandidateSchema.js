@@ -79,6 +79,9 @@ var candidateSchema = new mongoose.Schema(
       },
       desiredJobType: {
         type: String
+      },
+      githubId: {
+        type: String
       }
     }
 )
