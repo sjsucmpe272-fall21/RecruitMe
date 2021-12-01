@@ -3,7 +3,8 @@
     width: 600px;
     padding: 20px;
     max-width: 85vh;
-    height: 60vh;
+    height: 75vh;
+    overflow: scroll;
     border-radius: 20px;
     background-size: cover;
     background-position: center;
@@ -21,6 +22,7 @@
     display: flex;
     justify-content: center;
     margin-top: 5vh;
+    height: 100%;
 }
 
 .swipe{
