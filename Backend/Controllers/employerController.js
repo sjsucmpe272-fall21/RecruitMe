@@ -176,6 +176,7 @@ exports.createNewJob = (req, res) => {
     let result;
     try{
         result = new Job({
+            _id: req.body.jobID,
             name: req.body.jobName,
             jobType: req.body.type,
             jobDescription: req.body.description,
