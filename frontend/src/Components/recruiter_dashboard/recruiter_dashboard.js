@@ -6,10 +6,14 @@ import DataTableExtensions from "react-data-table-component-extensions";
 import "react-data-table-component-extensions/dist/index.css";
 import { jobs_list_columns, applied_columns } from "./recruiter_data";
 import HeaderRecruiter from "./recruiter_header"
-import { GETCOMPANY, GETJOBS, APP_CAN, SEL_CAN } from "../../api";
+import { GETCOMPFROMID, GETJOBS, APP_CAN, SEL_CAN } from "../../api";
 import "../../css/recruiter_dashboard.css"
+import Header from '../Header';
 
 const Dashboard = () => {
+  const userID  = localStorage.getItem("userID") ? localStorage.getItem("userID") : null;
+  // console.log("userID: ",userID)
+
   const [isLoading_jobs_list, setLoading_jobs_list] = useState(true);
   const [isLoading_applied, setLoading_Applied] = useState(true);
   const [isLoading_selected, setLoading_Selected] = useState(true);
@@ -42,12 +46,14 @@ const Dashboard = () => {
     const getjobs = async () =>
     {
       // get employer's company
-      let company_response = await axios.post(GETCOMPANY,{'email':'davidlee@google.com'})
+      let company_response = await axios.post(GETCOMPFROMID,{'userID': userID})
       let company = company_response.data[0].company
+      // console.log('company: ',company)
 
       // get all jobs for this company
       let jobs_response = await  axios.post(GETJOBS,{'company':company})
       let jobs = jobs_response.data
+      console.log("jobs: ",jobs)
       
 
         setTable_jobs_list((prevState) => ({
@@ -146,7 +152,7 @@ const Dashboard = () => {
 
   return (
     <>
-    <HeaderRecruiter />
+    <Header />
       <div className="container">
         <div className="row">
           <div className="col-12">
