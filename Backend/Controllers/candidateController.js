@@ -217,21 +217,35 @@ exports.getSuitableJobs = async (req,res)=>{
         index: 'jobs',
         body: {
             query: {
-                
-                bool: {
-                    // must_not: [
-                    //     {term: {
-                    //     candidates_applied: {
-                    //         value: parseInt(req.body.candidate_id)
-                    //     }
-                    //     }}
-                    // ],
-                    should: {
-                        match: {
-                            jobDescription: skills
-                        }
+                fuzzy: {
+                    jobDescription: {
+                        value: skills
+                    //   fuzziness: "AUTO",
+                    //   max_expansions: 50,
+                    //   prefix_length: 10,
+                    //   transpositions: true
                     }
-                }
+                  }
+                // match: {
+                //     jobDescription: {
+                //         value: skills
+                //     }
+                // }
+                // bool: {
+                //     // must_not: [
+                //     //     {term: {
+                //     //     candidates_applied: {
+                //     //         value: parseInt(req.body.candidate_id)
+                //     //     }
+                //     //     }}
+                //     // ],
+                  
+                //     should: {
+                //         match: {
+                //             jobDescription: skills
+                //         }
+                //     }
+                // }
                 
             },
         }
