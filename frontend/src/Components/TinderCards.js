@@ -82,7 +82,18 @@ function TinderCards() {
                     }
             }
 
-            console.log('applied_candidates: ',app_can)
+            let mydata = []
+            for (let jobid in app_can)
+            {
+                for (let i=0; i<app_can[jobid].length; i++)
+                {
+                    let can = app_can[jobid][i]
+                    can.job_id = jobid
+                    mydata.push(can)
+                }
+            }
+
+            console.log('applied_candidates: ',mydata)
         }
         getjobs()
 
