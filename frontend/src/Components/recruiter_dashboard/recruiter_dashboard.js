@@ -108,6 +108,8 @@ const Dashboard = () => {
           data: app_can_data,
         }));
         setLoading_Applied(false);
+
+        console.log('applied_candidates: ',app_can)
         
 
         // Data for selected candidates
@@ -136,7 +138,7 @@ const Dashboard = () => {
           data: app_sel_data,
         }));
         setLoading_Selected(false);
-        console.log(app_sel_data)
+        console.log('selected_candidates: ',app_sel_data)
 
     }
     getjobs()
