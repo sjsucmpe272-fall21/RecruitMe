@@ -29,7 +29,7 @@ function Header() {
         localStorage.removeItem("userType");
         localStorage.removeItem("userName");
         localStorage.clear();
-        axios.post('http://localhost:8001/logout')
+        axios.post('/logout')
             .then((res) => {
                 console.log('logged out');
                 setAuthTokenValue(null);

@@ -36,7 +36,7 @@ class CandidateSignUp extends React.Component {
 
         // axios.defaults.withCredentials = true;
         // axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
-        axios.post('http://localhost:8001/uploadFile', formData)
+        axios.post('/uploadFile', formData)
             .then(response => {
                 if (response.status === 200) {
                     console.log('Image name : ', imageFile.name);
@@ -52,7 +52,7 @@ class CandidateSignUp extends React.Component {
         details.resumeName = this.state.resumeName;
         console.log(details);
         // axios.defaults.withCredentials = true;
-        axios.post('http://localhost:8001/signup', details)
+        axios.post('/signup', details)
             .then((response) => {
                 if (response.status === 200) {
                     console.log("response ", response)

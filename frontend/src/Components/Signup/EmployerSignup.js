@@ -25,7 +25,7 @@ class EmployerSignUp extends React.Component {
         formData.append('photos', imageFile);
         console.log('formData ', imageFile);
 
-        axios.post('http://localhost:8001/uploadFile', formData)
+        axios.post('/uploadFile', formData)
             .then(response => {
                 if (response.status === 200) {
                     console.log('Image name : ', imageFile.name);
@@ -36,7 +36,7 @@ class EmployerSignUp extends React.Component {
     handleSignUp = (details) => {
         console.log('inside handleSignUp react');
         console.log(details);
-        axios.post('http://localhost:8001/signup', details)
+        axios.post('/signup', details)
             .then((response) => {
                 if (response.status === 200) {
                     console.log("response ", response)
@@ -57,7 +57,7 @@ class EmployerSignUp extends React.Component {
     }
 
     getCompanies = () => {
-        axios.post('http://localhost:8001/getAllCompanies')
+        axios.post('/getAllCompanies')
             .then((response) => {
                 if (response.status === 200) {
                     console.log("response ", response)

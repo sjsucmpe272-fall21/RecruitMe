@@ -15,7 +15,7 @@ export default function NewJoblist() {
 
     useEffect(() => {
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
-        axios.get('http://localhost:8001/jobs')
+        axios.get('/jobs')
             .then(response => {
                 console.log(response);
                 setAllJobs(response.data);

@@ -25,7 +25,7 @@ function Login(props) {
             );
             return;
         }
-        axios.post('http://localhost:8001/login', details)
+        axios.post('/login', details)
             .then(response => {
                 if(response.status === 200) {
                     console.log('response ', response.data);
@@ -74,7 +74,7 @@ function Login(props) {
     }
 
     const handleMailOtp = () => {
-        axios.post('http://localhost:8001/mailOTP', {email})
+        axios.post('/mailOTP', {email})
             .then(response => {
                 if(response.status === 200) {
                     console.log('response ', response.data);

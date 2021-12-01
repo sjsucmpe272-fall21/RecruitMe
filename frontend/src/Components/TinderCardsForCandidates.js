@@ -17,7 +17,7 @@ function TinderCardsForCandidates(props) {
     console.log("User id is "+userID);
     useEffect(async() => {
         // axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
-        // await axios.post('http://localhost:8001/api/candidate/prof', {candidate_id: userID})
+        // await axios.post('/api/candidate/prof', {candidate_id: userID})
         // .then(response => {
         //     console.log(response.data);
         //     const skills = response.data[0].skills.map(((a)=>`${a.name}`).join(' '));
@@ -28,7 +28,7 @@ function TinderCardsForCandidates(props) {
         //     console.log('error ', err);
         // })
 
-        axios.post('http://localhost:8001/api/getSuitableJobs',{"candidate_id":userID, "skills":props.skills})
+        axios.post('/api/getSuitableJobs',{"candidate_id":userID, "skills":props.skills})
             .then(response => {
                 console.log(response.data.body.hits.hits);
                 setAllJobs(response.data.body.hits.hits);

@@ -41,7 +41,7 @@ app.listen(port, () => {
     console.log(`app is running at ${port}`);
 })
 app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Origin", "http://3.16.108.26:3000"); // update to match the domain you will make the request from
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     // res.setHeader('Access-Control-Allow-Credentials', 'true');
     res.setHeader('Access-Control-Methods', 'GET,HEAD,POST,OPTIONS,POST,PUT,DELETE');

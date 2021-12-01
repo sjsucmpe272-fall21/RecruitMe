@@ -1,7 +1,7 @@
 
 export const SelectJob = appliedJob => {
     console.log(process.env.REACT_APP_BACKEND);
-    return fetch(`http://localhost:8001/api/job_apply`, {
+    return fetch(`/api/job_apply`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -18,7 +18,7 @@ export const SelectJob = appliedJob => {
 
   export const GetSimilarJobs = appliedJob => {
     console.log(process.env.REACT_APP_BACKEND);
-    return fetch(`http://localhost:8001/api/getSimilarJobs`, {
+    return fetch(`/api/getSimilarJobs`, {
       method: "POST",
       headers: {
         Accept: "application/json",
