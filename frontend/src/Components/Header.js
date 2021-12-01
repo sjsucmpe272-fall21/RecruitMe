@@ -169,6 +169,28 @@ function Header() {
                             Dashboard
                         </Button>
                     }
+                            
+                    {userType === 'Employer' && 
+                        <Button
+                            key='Create New Job'
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'red', display: 'block' }}
+                            href='/createNewJob'
+                        >
+                            Create New Job
+                        </Button>
+                    }
+
+                    {userType === 'Employer' && 
+                        <Button
+                            key='Dashboard'
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'red', display: 'block' }}
+                            href='/recruiter_dashboard'
+                        >
+                            Dashboard
+                        </Button>
+                    }
                     {/* ))} */}
                 </Box>
 

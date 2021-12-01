@@ -19,6 +19,7 @@ import CompanySignUp from './Components/Signup/CompanySignup';
 import CandidateDesiredFilter from './Components/candidate/CandidateDesiredFilter';
 import { Form, Formik } from 'formik';
 import Profile from './Components/Profile';
+import CreateNewJob from './Components/CreateNewJob';
 
 function App() {
   return (
@@ -68,6 +69,9 @@ function App() {
           </Route>
           <Route exact path="/profile">
             <Profile />
+          </Route>
+          <Route exact path="/createNewJob">
+            <CreateNewJob />
           </Route>
           {/* <CandidateRoute path="/">
             <TinderCards user="candidate"/>

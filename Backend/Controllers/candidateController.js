@@ -104,7 +104,7 @@ exports.getJobs = (req,res)=>{
                 "jobFunction":data.jobFunction,
                 "jobType":data.employmentType,
                 "industries":data.industries,
-                "candidates_applied": ["000000000000000000000000"]
+                "candidates_applied": []
             };
             
             await client.index({ 

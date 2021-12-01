@@ -51,7 +51,7 @@ const Dashboard = () => {
       // console.log('company: ',company)
 
       // get all jobs for this company
-      let jobs_response = await  axios.post(GETJOBS,{'company':company})
+      let jobs_response = await axios.post(GETJOBS,{'company':company})
       let jobs = jobs_response.data
       console.log("jobs: ",jobs)
       
