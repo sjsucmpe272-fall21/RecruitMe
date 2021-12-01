@@ -1,8 +1,10 @@
 import { React, useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
-import { Grid, Stack } from "@mui/material";
+import { Grid, Stack, Paper } from "@mui/material";
 import Header from "./Header";
 import axios from 'axios';
+import { Component } from 'react';
+import FileViewer from 'react-file-viewer';
 
 export default function Profile() {
     const [user, setUser] = useState('');
@@ -167,6 +169,29 @@ export default function Profile() {
                 </Container> */}
             </Stack>
         </Grid>
+        <Grid container maxHeight={'35rem'} style={{'overflow': 'scroll'}} spacing={2} justifyContent={'space-around'} textAlign={'center'}>
+            <Grid item xs={12} md={8}>
+                {userType === 'Candidate' && <ViewFile /> }
+            </Grid>
+        </Grid>
         </>
     )
 }
+
+
+class ViewFile extends Component {
+    render() {
+      return (
+          <Paper elevation={3}>
+                <FileViewer
+                    fileType={'pdf'}
+                    filePath={'https://recruit-me.s3.us-west-1.amazonaws.com/Fall+2021+cmpe+272+green+sheet.pdf'}
+                />
+          </Paper>
+      );
+    }
+  
+    onError(e) {
+      console.log(e, 'error in file-viewer');
+    }
+  }
