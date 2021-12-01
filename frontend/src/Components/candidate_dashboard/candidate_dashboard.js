@@ -39,6 +39,7 @@ const Dashboard = () => {
   useEffect(() => {
     // List Jobs
     axios.get(GETALLJOBS).then((response) => {
+      console.log("jobs: ",response.data)
       setTable_jobs_list((prevState) => ({
         ...prevState,
 
@@ -64,7 +65,11 @@ const Dashboard = () => {
         for (let i=0; i<jobs_selected.length; i++)
         {
           let selected_jobs_response = await axios.post(JOBDETAILS,{'job_id':jobs_selected[i]})
-          offers.push(selected_jobs_response.data[0])
+          if (selected_jobs_response.length)
+          {
+            offers.push(selected_jobs_response.data[0])
+          }
+          
         }
         setTable_offers((prevState) => ({
           ...prevState,
@@ -82,7 +87,11 @@ const Dashboard = () => {
       {
         promises.push(axios.post(JOBDETAILS,{'job_id':job_ids[i]}).then((response) =>
           {
-            job_details.push(response.data);
+            if (Object.keys(response.data).length !== 0)
+            {
+              job_details.push(response.data);
+            }
+            
           })
         )
       }

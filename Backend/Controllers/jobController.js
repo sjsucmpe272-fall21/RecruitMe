@@ -2,7 +2,7 @@ const Job = require("../Models/JobSchema");
 const Candidate = require("../Models/CandidateSchema");
 var mongoose = require('mongoose'); 
 
-exports.getAllJobs = (req, res)=> {
+exports.getAllJobs = async (req, res)=> {
 
     // return Job.find()
     // .exec()
@@ -15,21 +15,34 @@ exports.getAllJobs = (req, res)=> {
     //     };
     // })
 
-    Job.find(
-        {},
-        (err, doc) => {
-            if(err) {
-                console.log('error ', err);
-            }
-            else {
-                console.log(doc);
-                res.writeHead(200, {
-                    'Content-Type': 'text/plain'
-                });
-                res.end(JSON.stringify(doc));
-            }
+    // Job.find(
+    //     {},
+    //     (err, doc) => {
+    //         if(err) {
+    //             console.log('error ', err);
+    //         }
+    //         else {
+    //             console.log(doc);
+    //             res.writeHead(200, {
+    //                 'Content-Type': 'text/plain'
+    //             });
+    //             res.end(JSON.stringify(doc));
+    //         }
+    //     }
+    // )
+
+    return Job.find({}).exec(function(err, result) {
+        if (err) 
+        {
+            res.render('error', {
+                status: 500
+            });
+        } 
+        else 
+        {
+            res.json(result)
         }
-    )
+    });
 }
 
 exports.read_job = (req,res) =>
@@ -93,13 +106,14 @@ exports.delete_job = (req,res) =>
 }
 
 
-exports.get_job_details = (req,res) =>
+exports.get_job_details = async (req,res) =>
 {
     return Job.find({_id: req.body.job_id}).exec(function(err, result) {
         if (err) {
-            res.render('error', {
-                status: 500
-            });
+            res.json("")
+            // res.render('error', {
+            //     status: 500
+            // });
         } else {
             res.json(result);
         }

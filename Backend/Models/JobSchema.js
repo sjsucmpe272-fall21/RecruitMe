@@ -4,9 +4,9 @@ const CandidateSchema = require("./CandidateSchema")
 
 var jobSchema = new mongoose.Schema(
     {
-      // _id: {
-      //   type: String
-      // },
+      _id: {
+        type: String
+      },
       name: {
         type: String,
         // required: true,
