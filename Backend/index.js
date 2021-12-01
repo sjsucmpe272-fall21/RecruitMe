@@ -5,7 +5,9 @@ const app = express();
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 var passport = require('passport');
+const path = require("path");
 // const client = require('./elasticsearch/connection');
+
 
 const employerRoutes = require("./Routes/employerRoute");
 const loginRoute = require("./Routes/loginRoute");
@@ -15,6 +17,7 @@ const jobRoutes = require("./Routes/jobRoute");
 const uploadRoute = require('./Routes/uploadRoute');
 const signupRoute = require('./Routes/signupRoute');
 const companyRoute = require('./Routes/companyRoute');
+
 
 const env = process.env.NODE_ENV || 'development';
 
@@ -36,6 +39,14 @@ mongoose.connect(process.env.DATABASE, {
 
 //PORT
 const port = process.env.PORT || 8001;
+
+// Step 1:
+app.use(express.static(path.resolve(__dirname, "./frontend/build")));
+// Step 2:
+app.get("*", function (request, response) {
+  response.sendFile(path.resolve(__dirname, "./frontend/build", "index.html"));
+})
+
 
 app.listen(port, () => {
     console.log(`app is running at ${port}`);
