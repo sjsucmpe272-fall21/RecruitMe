@@ -176,7 +176,7 @@ class EmployerSignUp extends React.Component {
                                         >
                                             <option defaultValue key="defaultVal" value="defaultVal">--select company--</option>
                                             {this.state.companyList.map(company => {
-                                                return <option key={company._id} value={company._id}>{company.name}</option>
+                                                return <option key={company._id} value={company.name}>{company.name}</option>
                                             })}
                                         </select>
                                         <ErrorMessage name="company" component="div" />
