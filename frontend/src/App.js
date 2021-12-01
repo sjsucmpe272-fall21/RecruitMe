@@ -3,7 +3,7 @@ import Header from './Components/Header'
 import {BrowserRouter as Router,Switch, Route, Link} from "react-router-dom"
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import Login from './Components/Login';
+import Login from './Components/login';
 import TinderCards from "./Components/TinderCards"
 import RecruiterRoute from "./authHelper/RecruiterRoute"
 import CandidateRoute from "./authHelper/CandidateRoute"
@@ -28,17 +28,12 @@ function App() {
           <Route exact path="/">
             <Login />
           </Route>
-          <Route exact path="/login">
-            <Form>
-              <Login />
-            </Form>
-          </Route>
           <Route exact path="/chat">
           </Route>
-          <RecruiterRoute exact path="/home">
+          <Route exact path="/recruiter">
             <TinderCards user="recruiter"/>
-          </RecruiterRoute>
-           <Route exact path="/">
+          </Route>
+           <Route exact path="/candidate">
             <TinderCardsForCandidates/>
           </Route>
           {/* <Route exact path="/">

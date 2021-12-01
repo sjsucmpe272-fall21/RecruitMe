@@ -7,25 +7,27 @@ import FormControl from '@mui/material/FormControl';
 import { Select as SpecialSelect } from "react-dropdown-select";
 import Select from '@mui/material/Select';
 import axios from 'axios';
-
+import {Redirect} from 'react-router-dom'
+import TinderCardsForCandidates from '../TinderCardsForCandidates';
 export default function CandidateDesiredFilter(props) {
     const [seniorityLevel, setSeniorityLevel] = useState([]);
     const [jobType, setJobType] = useState([]);
     const [skills, setSkills] = useState([]);
+    const [redirect,setRedirect] = useState(false);
 
     useEffect(() => {
-        const userID = localStorage.getItem('userID');
-        console.log('userID ', userID);
-        axios.post('http://localhost:8001/api/candidate/prof', {candidate_id: userID})
-            .then(response => {
-                console.log(response.data);
-                const skills = response.data[0].skills.map(skillArray => skillArray[0]);
-                console.log('skills ', skills);
-                setSkills(skills);
-            })
-            .catch(err => {
-                console.log('error ', err);
-            })
+        // const userID = localStorage.getItem('userID');
+        // console.log('userID ', userID);
+        // axios.post('http://localhost:8001/api/candidate/prof', {candidate_id: userID})
+        //     .then(response => {
+        //         console.log(response.data);
+        //         const skills = response.data[0].skills.map(((a)=>`${a.name}`).join(' '));
+        //         console.log('skills ', skills);
+        //         setSkills(skills);
+        //     })
+        //     .catch(err => {
+        //         console.log('error ', err);
+        //     })
     }, []);
 
     const handleChange = (event) => {
@@ -38,24 +40,30 @@ export default function CandidateDesiredFilter(props) {
     };
 
     const handleApplyFilter = () => {
-        console.log('inside apply filter ', seniorityLevel, jobType, skills);
-        const userID = localStorage.getItem('userID');
-        axios.post('http://localhost:8001/api/applyFilters', {
-            userID,
-            seniorityLevel: seniorityLevel.toString(),
-            jobType: jobType.toString(),
-            skills: skills
-        })
-            .then(response => {
-                console.log('successfully saved filter results to db');
-                // const skills = response.data[0].skills.map(skillArray => skillArray[0]);
-                // console.log('skills ', skills);
-                // setSkills(skills);
-            })
-            .catch(err => {
-                console.log('error ', err);
-            })
+        setRedirect(true);
+
+        // console.log('inside apply filter ', seniorityLevel, jobType, skills);
+        // const userID = localStorage.getItem('userID');
+        // axios.post('http://localhost:8001/api/applyFilters', {
+        //     userID,
+        //     seniorityLevel: seniorityLevel.toString(),
+        //     jobType: jobType.toString(),
+        //     skills: skills
+        // })
+        //     .then(response => {
+        //         setRedirect(true);
+        //         <Redirect to='/candidate' />
+        //         console.log('successfully saved filter results to db');
+        //         // const skills = response.data[0].skills.map(skillArray => skillArray[0]);
+        //         // console.log('skills ', skills);
+        //         // setSkills(skills);
+        //     })
+        //     .catch(err => {
+        //         console.log('error ', err);
+        //     })
     }
+    if(redirect)
+        return <TinderCardsForCandidates skills={skills}/>
 
     return (
         <>
