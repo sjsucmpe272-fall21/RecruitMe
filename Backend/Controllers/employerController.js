@@ -155,6 +155,40 @@ exports.getCandidates = (req,res)=>{
     })
 }
 
+exports.createNewJob = (req, res) => {
+    console.log('createnewjob req.body ', req.body);
+    let result;
+    try{
+        result = new Job({
+            name: req.body.jobName,
+            jobType: req.body.type,
+            jobDescription: req.body.description,
+            company: req.body.company,
+            jobLocation: req.body.location,
+            senorityLevel: req.body.seniorityLevel,
+            applyLink: req.body.applyLink,
+            dateposted: req.body.datePosted,
+            industries: req.body.industries,
+            country: req.body.country,
+            skills: req.body.skills
+        });
+        result.save((err, data) => {
+            if(err) {
+                console.log('error in saving to db ', err);
+                res.status(500).end('Error occured in saving to db');
+            }
+            else {
+                console.log('create new job successful');
+                res.status(200).end('create new job successful');
+            }
+        })
+    }
+    catch(err) {
+        console.log(err);
+        res.status(500).end('Error in query execution in creating job ');
+    }
+
+}
 
 // xports.getCandidates = (req,res)=>{
 //     var jobId = req.body.jobId;

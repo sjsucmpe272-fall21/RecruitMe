@@ -4,9 +4,9 @@ const CandidateSchema = require("./CandidateSchema")
 
 var jobSchema = new mongoose.Schema(
     {
-      _id: {
-        type: String
-      },
+      // _id: {
+      //   type: String
+      // },
       name: {
         type: String,
         // required: true,
@@ -61,12 +61,12 @@ var jobSchema = new mongoose.Schema(
     },
     candidates_applied: [{
           type: String,
-          required: true,
+          // required: true,
           maxlength: 100
       }],
     candidates_selected: [{
           type: String,
-          required: true,
+          // required: true,
           maxlength: 100
       }],
       employer : {
