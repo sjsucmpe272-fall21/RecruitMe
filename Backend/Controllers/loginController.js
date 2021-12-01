@@ -55,21 +55,17 @@ exports.login = async (req, res) => {
             user = await Company.findOne({email: req.body.email});
         }
         console.log('user from db ', user);
-        
+        console.log('passwords from req.body and db ', req.body.password, user.encry_password);
+
         let isPasswordMatch = await bcrypt.compare(req.body.password, user.encry_password);
         if(isPasswordMatch) {
-            // if( !== req.body.otp) {
-            //     localStorage.removeItem('otp');
-                // res.status(401).end('Invalid OTP');
-            // }
+            console.log('passwords matched');
             const payload = { _id: user._id, user: user, userType: req.body.userType};
             const token = jwt.sign(payload, 'recruitme', {expiresIn: 1008000});
-            // localStorage.removeItem('otp');
             res.status(200).end('Bearer '+ token);
         }
         else {
             console.log('Password does not match ');
-            // localStorage.removeItem('otp');
             res.status(401).end('Invalid Credentials');
         }
     }

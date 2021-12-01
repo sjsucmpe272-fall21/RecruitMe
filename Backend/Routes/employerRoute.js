@@ -4,7 +4,7 @@ const { checkAuth } = require("../Utils/auth");
 
 const{ getEmployerProfile, select_candidate, reject_candidate, get_jobs, get_company, get_applied_candidates, get_selected_candidates } = require("../Controllers/employerController")
 
-router.get("/employer", checkAuth, getEmployerProfile);
+router.post("/employer", getEmployerProfile);
 router.get("/select_candidate", checkAuth, select_candidate);
 router.get("/reject_candidate", checkAuth, reject_candidate);
 router.post("/emp_jobs",get_jobs);

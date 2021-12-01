@@ -35,6 +35,14 @@ function Login(props) {
                     localStorage.setItem('userID', response.data.user._id);
                     console.log('userID from localStorage ', localStorage);
                     localStorage.setItem('userType', details.userType);
+                    let userName;
+                    if(userType === 'Company') {
+                        userName = response.data.user.name;
+                    }
+                    else if(userType === 'Candidate' || userType === 'Employer') {
+                        userName = response.data.user.firstName + ' ' + response.data.user.lastName;
+                    }
+                    localStorage.setItem('userName', userName);
                     localStorage.removeItem('otp');
                     axios.defaults.headers.common['Authorization'] = token;
                     if(token.length > 0) {

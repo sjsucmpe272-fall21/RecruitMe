@@ -2,7 +2,7 @@ const Employer = require("../Models/EmployerSchema");
 const Job = require("../Models/JobSchema");
 const Candidate = require("../Models/CandidateSchema");
 
-exports.getEmployerProfile = ()=> {
+exports.getEmployerProfile = (req, res)=> {
     var employerId = req.body.employerId;
 
     return Employer.find({_id: employerId})

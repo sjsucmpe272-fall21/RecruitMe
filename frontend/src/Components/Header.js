@@ -27,6 +27,7 @@ function Header() {
         localStorage.removeItem("token");
         localStorage.removeItem("userID");
         localStorage.removeItem("userType");
+        localStorage.removeItem("userName");
         localStorage.clear();
         axios.post('http://localhost:8001/logout')
             .then((res) => {
@@ -38,8 +39,8 @@ function Header() {
             })
     }
 
-    const pages = [{text: 'Job Listings', link: '/newJobs'}, {text: 'Apply Desired Filters', link: '/applyFilters'}];
-    const settings = ['Profile', 'Dashboard', 'Logout'];
+    // const pages = [{text: 'Job Listings', link: '/newJobs'}, {text: 'Apply Desired Filters', link: '/applyFilters'}];
+    // const settings = ['Profile', 'Dashboard', 'Logout'];
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -159,6 +160,9 @@ function Header() {
                     {/* ))} */}
                 </Box>
 
+                <MenuItem key='username'>
+                    <Typography textAlign="center">Hi, {localStorage.getItem('userName')}</Typography>
+                </MenuItem>
                 <Box sx={{ flexGrow: 0 }}>
                     <Tooltip title="Open settings">
                     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -167,30 +171,30 @@ function Header() {
                     </IconButton>
                     </Tooltip>
                     <Menu
-                    sx={{ mt: '45px' }}
-                    id="menu-appbar"
-                    anchorEl={anchorElUser}
-                    anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                    }}
-                    keepMounted
-                    transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                    }}
-                    open={Boolean(anchorElUser)}
-                    onClose={handleCloseUserMenu}
+                        sx={{ mt: '45px' }}
+                        id="menu-appbar"
+                        anchorEl={anchorElUser}
+                        anchorOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                        }}
+                        keepMounted
+                        transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                        }}
+                        open={Boolean(anchorElUser)}
+                        onClose={handleCloseUserMenu}
                     >
                     {/* {settings.map((setting) => ( */}
-                        <MenuItem key='profile'>
-                        <Typography textAlign="center">Profile</Typography>
+                        <MenuItem key='profile' component='a' href='/profile'>
+                            <Typography textAlign="center">Profile</Typography>
                         </MenuItem>
                         <MenuItem key='dashboard'>
-                        <Typography textAlign="center">Dashboard</Typography>
+                            <Typography textAlign="center">Dashboard</Typography>
                         </MenuItem>
                         <MenuItem key='logout' onClick={handleLogout}>
-                        <Typography textAlign="center">Logout</Typography>
+                            <Typography textAlign="center">Logout</Typography>
                         </MenuItem>
                     {/* ))} */}
                     </Menu>

@@ -15,3 +15,18 @@ exports.getAllCompanies = async (req,res) =>
         }
     });
 }
+
+exports.getCompanyProfile = (req, res)=> {
+    var companyID = req.body.companyID;
+
+    return Company.find({_id: companyID})
+    .exec()
+    .then((company) => {
+        return res.json(company);
+    })
+    .catch(error=>{
+        return {
+            error: "No company Found "+error
+        };
+    })
+}

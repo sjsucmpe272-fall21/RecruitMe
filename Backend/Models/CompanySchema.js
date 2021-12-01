@@ -61,6 +61,10 @@ var companySchema = new mongoose.Schema(
       industries: {
         type: [Array],
         required: true,
+      },
+      encry_password: {
+        type: String,
+        required: true
       }
     }
 )
