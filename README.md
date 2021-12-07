@@ -43,7 +43,7 @@ We have used the following technologies for this project:<br>
 
 <h1>Candidate right swiping a job</h1>
 
-![image](https://user-images.githubusercontent.com/26499781/144993285-7faffd69-ee7a-4bfd-9a8a-839015cffca6.png)
+![image](https://user-images.githubusercontent.com/26499781/144994344-f0f6ee8c-3b11-47a6-b342-816a8ef19a1d.png)
 
 <h1>All the new job listing</h1>
 
