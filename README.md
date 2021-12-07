@@ -25,3 +25,37 @@ We have used the following technologies for this project:<br>
 4)	Node.js<br>
 5)	Amazon Web Services<br>
 6)	Elastic Search<br>
+
+# ScreenShots
+
+<h1>Login Page</h1>
+
+![image](https://user-images.githubusercontent.com/26499781/144992685-5238ada4-3d99-4b99-bfcc-3c230e2b9d7f.png)
+
+
+<h1>Signup Page</h1>
+
+![image](https://user-images.githubusercontent.com/26499781/144992779-6f1de96b-c3b5-4c5e-9bc8-1fc8cdfb9af0.png)
+
+<h1>Apply FIlters</h1>
+
+![image](https://user-images.githubusercontent.com/26499781/144992981-f0e70233-be95-4441-bd15-c4876988d863.png)
+
+<h1>Candidate right swiping a job</h1>
+
+![image](https://user-images.githubusercontent.com/26499781/144993285-7faffd69-ee7a-4bfd-9a8a-839015cffca6.png)
+
+<h1>All the new job listing</h1>
+
+![image](https://user-images.githubusercontent.com/26499781/144993403-40b107e4-1c65-4288-855f-2ad5b4461b5e.png)
+
+<h1>Candidate Dashboard</h1>
+
+![image](https://user-images.githubusercontent.com/26499781/144993573-2ce4ba4a-032a-4d97-a42d-a763ebb41f4d.png)
+
+<h1>Employer swipes right on a candidate</h1>
+
+![image](https://user-images.githubusercontent.com/26499781/144993920-0acea2b6-2ff1-4246-a09e-65ce6baaba29.png)
+
+
+
